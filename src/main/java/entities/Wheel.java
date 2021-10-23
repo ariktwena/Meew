@@ -37,9 +37,11 @@ public class Wheel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    
+    @Column(name = "wheelName")
+    private String wheelName;
+
     //***************One to Many****************
-    @OneToMany(mappedBy = "wheel", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
+    @OneToMany(mappedBy = "wheel", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private ArrayList<Field> fields;
 
     public void addField(Field field) {
@@ -53,30 +55,30 @@ public class Wheel implements Serializable {
         return fields;
     }
     //*****************************************
-    
+
     //***************Many to Many****************
-    @ManyToMany(mappedBy = "wheels", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
+    @ManyToMany(mappedBy = "wheels", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private ArrayList<Player> players;
 
     public void addPlayer(Player player) {
-        if(player != null){
+        if (player != null) {
             this.players.add(player);
             player.getWheels().add(this);
         }
     }
-    
-     public void removePlayer(Player player) {
-        if(player != null){
+
+    public void removePlayer(Player player) {
+        if (player != null) {
             this.players.remove(player);
             player.getWheels().remove(this);
         }
     }
-    
+
     public ArrayList<Player> getPlayers() {
         return players;
     }
     //*******************************************
-    
+
     //***************Many to One****************
     @ManyToOne
     private Company company;
@@ -90,10 +92,31 @@ public class Wheel implements Serializable {
     }
     //***************************************************************
 
+    //***************One to Many****************
+    @OneToMany(mappedBy = "wheel", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    private ArrayList<Spin> spins;
+
+    public void addSpin(Spin spin) {
+        if (spin != null) {
+            spin.setWheel(this);
+            this.spins.add(spin);
+        }
+    }
+
+    public ArrayList<Spin> getSpins() {
+        return spins;
+    }
+    //*****************************************
+
     public Wheel() {
+    }
+
+    public Wheel(String wheelName) {
+        this.wheelName = wheelName;
         this.fields = new ArrayList<>();
         this.players = new ArrayList<>();
         this.company = null;
+        this.spins = new ArrayList<>();
     }
 
     public int getId() {
@@ -104,6 +127,12 @@ public class Wheel implements Serializable {
         this.id = id;
     }
 
-  
-    
+    public String getWheelName() {
+        return wheelName;
+    }
+
+    public void setWheelName(String wheelName) {
+        this.wheelName = wheelName;
+    }
+
 }

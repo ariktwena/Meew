@@ -61,6 +61,19 @@ public class Spin implements Serializable {
         return player;
     }
     //***************************************************************
+    
+    //***************Many to One****************
+    @ManyToOne
+    private Wheel wheel;
+
+    public void setWheel(Wheel wheel) {
+        this.wheel = wheel;
+    }
+
+    public Wheel getWheel() {
+        return wheel;
+    }
+    //***************************************************************
 
     public Spin() {
     }
@@ -75,6 +88,7 @@ public class Spin implements Serializable {
         this.resultName = "";
         this.resultValue = -1;
         this.player = null;
+        this.wheel = null;
     }
 
     public int getId() {
