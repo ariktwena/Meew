@@ -22,8 +22,9 @@ public class SpinDTO {
     private double rotate;
     private int resultNumber;
     private String resultName;
-    private int resultValue;
+    private double resultValue;
     private PlayerDTO player;
+    private WheelDTO wheel;
 
     public SpinDTO() {
     }
@@ -39,6 +40,21 @@ public class SpinDTO {
         this.resultName = spin.getResultName();
         this.resultValue = spin.getResultValue();
         this.player = player == null ? null : new PlayerDTO(spin.getPlayer());
+        this.wheel = wheel == null ? null : new WheelDTO(spin.getWheel());
+    }
+    
+    public SpinDTO(int fieldNumbers, PlayerDTO player, WheelDTO wheelDTO) {
+        this.id = -1;
+        this.fieldNumbers = fieldNumbers;
+        this.arcSize = (2 * Math.PI) / fieldNumbers;
+        this.top = findTop(fieldNumbers);
+        this.offSet = findOffSet(fieldNumbers, this.arcSize);
+        this.rotate = Math.floor(Math.random() * 900) + 500;
+        this.resultNumber = findResultNumber(this.arcSize, this.top, this.offSet, this.rotate, fieldNumbers);
+        this.resultName = "";
+        this.resultValue = -1;
+        this.player = player;
+        this.wheel = wheelDTO;
     }
     
     public SpinDTO(int fieldNumbers, PlayerDTO player) {
@@ -52,6 +68,21 @@ public class SpinDTO {
         this.resultName = "";
         this.resultValue = -1;
         this.player = player;
+        this.wheel = null;
+    }
+    
+    public SpinDTO(PlayerDTO player) {
+        this.id = -1;
+        this.fieldNumbers = 0;
+        this.arcSize = (2 * Math.PI) / fieldNumbers;
+        this.top = findTop(fieldNumbers);
+        this.offSet = findOffSet(fieldNumbers, this.arcSize);
+        this.rotate = Math.floor(Math.random() * 900) + 500;
+        this.resultNumber = findResultNumber(this.arcSize, this.top, this.offSet, this.rotate, fieldNumbers);
+        this.resultName = "";
+        this.resultValue = -1;
+        this.player = player;
+        this.wheel = null;
     }
     
       private int findTop(int fieldNumbers) {
@@ -170,7 +201,7 @@ public class SpinDTO {
         this.resultName = fields.get(this.resultNumber).getPrizeName();
     }
 
-    public int getResultValue() {
+    public double getResultValue() {
         return resultValue;
     }
 
@@ -190,12 +221,17 @@ public class SpinDTO {
         this.player = player;
     }
 
+    public WheelDTO getWheel() {
+        return wheel;
+    }
+
+    public void setWheel(WheelDTO wheel) {
+        this.wheel = wheel;
+    }
+
     @Override
     public String toString() {
-        return "SpinDTO{" + "id=" + id + ", fieldNumbers=" + fieldNumbers + ", arcSize=" + arcSize + ", top=" + top + ", offSet=" + offSet + ", rotate=" + rotate + ", resultNumber=" + resultNumber + ", resultName=" + resultName + ", resultValue=" + resultValue + ", player=" + player + '}';
+        return "SpinDTO{" + "id=" + id + ", fieldNumbers=" + fieldNumbers + ", arcSize=" + arcSize + ", top=" + top + ", offSet=" + offSet + ", rotate=" + rotate + ", resultNumber=" + resultNumber + ", resultName=" + resultName + ", resultValue=" + resultValue + ", player=" + player + ", wheel=" + wheel + '}';
     }
-    
-    
-    
-    
+
 }

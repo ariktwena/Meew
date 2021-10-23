@@ -5,12 +5,32 @@
  */
 package interfaces;
 
+import dto.CompanyDTO;
+import dto.PlayerDTO;
+import dto.SpinDTO;
+import dto.SpinDTOsmall;
+import dto.WheelDTO;
+import java.util.ArrayList;
+import javax.ws.rs.WebApplicationException;
+
 /**
  *
  * @author Tweny
  */
 public interface IWheelFacade {
     
+    public WheelDTO createWheel(WheelDTO wheelDTO) throws WebApplicationException;
     
+    public ArrayList<WheelDTO> getAllWheels() throws WebApplicationException;
+    
+    public WheelDTO getWheelById (int id) throws WebApplicationException;
+    
+    public SpinDTO createSpin(PlayerDTO playerDTO, int wheelID) throws WebApplicationException;
+    
+    public ArrayList<SpinDTOsmall> getAllSpins() throws WebApplicationException;
+    
+    public ArrayList<PlayerDTO> getAllPlayers() throws WebApplicationException;
+    
+    public ArrayList<CompanyDTO> getAllCompanies() throws WebApplicationException;
     
 }

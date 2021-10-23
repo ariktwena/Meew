@@ -1,12 +1,12 @@
-<h1 align="center">Welcome to 3 Semester Spring 2021 - Exam 👋</h1>
+<h1 align="center">MeeW Case</h1>
 
-<h4 align="center">Exam for 3. Semester of Spring 2021 </h4>
+<h4 align="center">Job Interview</h4>
 
 [![Build Status](https://app.travis-ci.com/ariktwena/Meew.svg?token=pepPqVzg9ADy2wZERUTz&branch=master)](https://app.travis-ci.com/ariktwena/Meew)
 
 ## Author
 
-👤 **Sigurd Arik Gaarde Nielsen**
+👤 **Arik Gaarde Nielsen**
 
 * [Github](https://github.com/ariktwena)
 * [LinkedIn](https://www.linkedin.com/in/arik-gaarde-nielsen-3a54255/)
@@ -19,9 +19,9 @@
 
 #### 🖥 [GitHub FrontEnd](https://github.com/ariktwena/Frontend_PROXY_exam)
 
-#### 💾 [GitHub BackEnd](https://github.com/ariktwena/BackEnd_PROXY_Exam)
+#### 💾 [GitHub BackEnd](https://github.com/ariktwena/Meew)
 
-#### 👮🏽‍♂️ [Travis](https://www.travis-ci.com/github/ariktwena/BackEnd_PROXY_Exam)
+#### 👮🏽‍♂️ [Travis](https://app.travis-ci.com/github/ariktwena/Meew)
 
 ## Using this project
 

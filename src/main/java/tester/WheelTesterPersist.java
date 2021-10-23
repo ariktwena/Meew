@@ -19,7 +19,7 @@ import utils.EMF_Creator;
  *
  * @author Tweny
  */
-public class WheelTester {
+public class WheelTesterPersist {
     public static void main(String[] args) {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
@@ -31,7 +31,7 @@ public class WheelTester {
         Field f3 = new Field("Jepp", 600);
         Field f4 = new Field("Chopper", 800);
         Field f5 = new Field("Bike", 1000);
-        Wheel w = new Wheel();
+        Wheel w = new Wheel("Wheel_test_name");
         w.addField(f1);
         w.addField(f2);
         w.addField(f3);
@@ -57,6 +57,7 @@ public class WheelTester {
         s.setResultName(w.getFields());
         s.setResultValue(w.getFields());
         s.setPlayer(p);
+        s.setWheel(w);
         em.persist(s);
         
         em.getTransaction().commit();
