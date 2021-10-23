@@ -2,7 +2,7 @@
 
 <h4 align="center">Exam for 3. Semester of Spring 2021 </h4>
 
-[![Build Status](https://www.travis-ci.com/ariktwena/BackEnd_PROXY_Exam.svg?branch=master)](https://www.travis-ci.com/ariktwena/BackEnd_PROXY_Exam)
+[![Build Status](https://app.travis-ci.com/ariktwena/Meew.svg?token=pepPqVzg9ADy2wZERUTz&branch=master)](https://app.travis-ci.com/ariktwena/Meew)
 
 ## Author
 
