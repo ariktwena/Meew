@@ -47,7 +47,7 @@ public class Spin implements Serializable {
     @Column(name = "resultName")
     private String resultName;
     @Column(name = "resultValue")
-    private int resultValue;
+    private double resultValue;
     
     //***************Many to One****************
     @ManyToOne
@@ -159,7 +159,7 @@ public class Spin implements Serializable {
         this.resultName = fields.get(this.resultNumber).getPrizeName();
     }
 
-    public int getResultValue() {
+    public double getResultValue() {
         return resultValue;
     }
 

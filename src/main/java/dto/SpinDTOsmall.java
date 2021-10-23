@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class SpinDTOsmall {
     private int id;
     private String resultName;
-    private int resultValue;
+    private double resultValue;
     private PlayerDTO player;
 
     public SpinDTOsmall() {
@@ -52,7 +52,7 @@ public class SpinDTOsmall {
         this.resultName = resultName;
     }
 
-    public int getResultValue() {
+    public double getResultValue() {
         return resultValue;
     }
 

@@ -22,7 +22,7 @@ public class SpinDTO {
     private double rotate;
     private int resultNumber;
     private String resultName;
-    private int resultValue;
+    private double resultValue;
     private PlayerDTO player;
     private WheelDTO wheel;
 
@@ -201,7 +201,7 @@ public class SpinDTO {
         this.resultName = fields.get(this.resultNumber).getPrizeName();
     }
 
-    public int getResultValue() {
+    public double getResultValue() {
         return resultValue;
     }
 
