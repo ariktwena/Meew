@@ -27,7 +27,7 @@ public interface IWheelFacade {
     
     public SpinDTO createSpin(PlayerDTO playerDTO, int wheelID) throws WebApplicationException;
     
-    public ArrayList<SpinDTOsmall> getAllSpins() throws WebApplicationException;
+    public ArrayList<SpinDTO> getAllSpins() throws WebApplicationException;
     
     public ArrayList<PlayerDTO> getAllPlayers() throws WebApplicationException;
     

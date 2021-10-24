@@ -9,8 +9,10 @@ import dto.CompanyDTO;
 import dto.FieldDTO;
 import dto.PlayerDTO;
 import dto.SpinDTO;
+import dto.SpinDTOsmall;
 import dto.WheelDTO;
 import facades.WheelFacade;
+import java.util.ArrayList;
 import javax.persistence.EntityManagerFactory;
 import utils.EMF_Creator;
 
@@ -45,9 +47,14 @@ public class WheelTesterFacade {
         System.err.println(wheelDto);
         System.out.println("-----");
         
-        PlayerDTO playerDTO = new PlayerDTO("Sammy");
+        PlayerDTO playerDTO = new PlayerDTO("Bob", "test@test.dk");
         SpinDTO spinDTO = FACADE.createSpin(playerDTO, wheelDto.getId());
-        System.out.println(spinDTO);
+//        System.out.println(spinDTO);
+        
+        ArrayList<SpinDTO> spinDTOs = FACADE.getAllSpins();
+        for(SpinDTO s : spinDTOs){
+            System.out.println(s);
+        }
     }
     
 }

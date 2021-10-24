@@ -116,10 +116,8 @@ public class WheelFacade implements IWheelFacade {
         try {
             Wheel wheel = em.find(Wheel.class, id);
             return new WheelDTO(wheel);
-        } catch (NoResultException ex) {
-            throw new WebApplicationException("No Wheel with id: " + id + " exists", 404);
         } catch (RuntimeException ex) {
-            throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
+            throw new WebApplicationException("No Wheel with id: " + id + " exists", 404);
         } finally {
             em.close();
         }
@@ -135,7 +133,7 @@ public class WheelFacade implements IWheelFacade {
 
         Wheel wheel = em.find(Wheel.class, wheelID);
 
-        Player player = getPlaterByName(playerDTO.getPlayerName());
+        Player player = getPlaterByName(playerDTO.getPlayerName(), playerDTO.getEmail());
 
         Spin spin = new Spin(wheel.getFields().size());
         spin.setResultName(wheel.getFields());
@@ -160,16 +158,16 @@ public class WheelFacade implements IWheelFacade {
     }
 
     @Override
-    public ArrayList<SpinDTOsmall> getAllSpins() throws WebApplicationException {
+    public ArrayList<SpinDTO> getAllSpins() throws WebApplicationException {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Spin> query = em.createQuery("SELECT s FROM Spin s JOIN s.player p", Spin.class);
             List<Spin> spins = query.getResultList();
-            ArrayList<SpinDTOsmall> spinDTOsmalls = new ArrayList<>();
+            ArrayList<SpinDTO> spinDTOs = new ArrayList<>();
             for (Spin s : spins) {
-                spinDTOsmalls.add(new SpinDTOsmall(s));
+                spinDTOs.add(new SpinDTO(s));
             }
-            return spinDTOsmalls;
+            return spinDTOs;
         } catch (RuntimeException ex) {
             throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
         } finally {
@@ -213,7 +211,7 @@ public class WheelFacade implements IWheelFacade {
         }
     }
 
-    private Player getPlaterByName(String name) {
+    private Player getPlaterByName(String name, String email) {
         EntityManager em = emf.createEntityManager();
         try {
             Query query = em.createQuery("SELECT p FROM Player p WHERE p.playerName = :name ", Player.class);
@@ -222,7 +220,7 @@ public class WheelFacade implements IWheelFacade {
             return player;
         } catch (NoResultException ex) {
             em.getTransaction().begin();
-            Player player = new Player(name);
+            Player player = new Player(name, email);
             em.persist(player);
             em.getTransaction().commit();
             return player;

@@ -7,6 +7,7 @@ package dto;
 
 import entities.Field;
 import entities.Spin;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +26,7 @@ public class SpinDTO {
     private double resultValue;
     private PlayerDTO player;
     private WheelDTO wheel;
+    private LocalDate date;
 
     public SpinDTO() {
     }
@@ -39,11 +41,12 @@ public class SpinDTO {
         this.resultNumber = spin.getResultNumber();
         this.resultName = spin.getResultName();
         this.resultValue = spin.getResultValue();
-        this.player = player == null ? null : new PlayerDTO(spin.getPlayer());
-        this.wheel = wheel == null ? null : new WheelDTO(spin.getWheel());
+        this.player = spin.getPlayer() != null ? new PlayerDTO(spin.getPlayer()) : null ;
+        this.wheel = spin.getWheel() == null ? null : new WheelDTO(spin.getWheel());
+        this.date = spin.getDate();
     }
     
-    public SpinDTO(int fieldNumbers, PlayerDTO player, WheelDTO wheelDTO) {
+    public SpinDTO(int fieldNumbers, PlayerDTO playerDTO, WheelDTO wheelDTO) {
         this.id = -1;
         this.fieldNumbers = fieldNumbers;
         this.arcSize = (2 * Math.PI) / fieldNumbers;
@@ -53,11 +56,12 @@ public class SpinDTO {
         this.resultNumber = findResultNumber(this.arcSize, this.top, this.offSet, this.rotate, fieldNumbers);
         this.resultName = "";
         this.resultValue = -1;
-        this.player = player;
+        this.player = playerDTO;
         this.wheel = wheelDTO;
+        this.date = LocalDate.now();
     }
     
-    public SpinDTO(int fieldNumbers, PlayerDTO player) {
+    public SpinDTO(int fieldNumbers, PlayerDTO playerDTO) {
         this.id = -1;
         this.fieldNumbers = fieldNumbers;
         this.arcSize = (2 * Math.PI) / fieldNumbers;
@@ -67,11 +71,12 @@ public class SpinDTO {
         this.resultNumber = findResultNumber(this.arcSize, this.top, this.offSet, this.rotate, fieldNumbers);
         this.resultName = "";
         this.resultValue = -1;
-        this.player = player;
+        this.player = playerDTO;
         this.wheel = null;
+        this.date = LocalDate.now();
     }
     
-    public SpinDTO(PlayerDTO player) {
+    public SpinDTO(PlayerDTO playerDTO) {
         this.id = -1;
         this.fieldNumbers = 0;
         this.arcSize = (2 * Math.PI) / fieldNumbers;
@@ -81,8 +86,9 @@ public class SpinDTO {
         this.resultNumber = findResultNumber(this.arcSize, this.top, this.offSet, this.rotate, fieldNumbers);
         this.resultName = "";
         this.resultValue = -1;
-        this.player = player;
+        this.player = playerDTO;
         this.wheel = null;
+        this.date = LocalDate.now();
     }
     
       private int findTop(int fieldNumbers) {
@@ -229,9 +235,19 @@ public class SpinDTO {
         this.wheel = wheel;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        this.date = LocalDate.now();
+    }
+
     @Override
     public String toString() {
-        return "SpinDTO{" + "id=" + id + ", fieldNumbers=" + fieldNumbers + ", arcSize=" + arcSize + ", top=" + top + ", offSet=" + offSet + ", rotate=" + rotate + ", resultNumber=" + resultNumber + ", resultName=" + resultName + ", resultValue=" + resultValue + ", player=" + player + ", wheel=" + wheel + '}';
+        return "SpinDTO{" + "id=" + id + ", fieldNumbers=" + fieldNumbers + ", arcSize=" + arcSize + ", top=" + top + ", offSet=" + offSet + ", rotate=" + rotate + ", resultNumber=" + resultNumber + ", resultName=" + resultName + ", resultValue=" + resultValue + ", player=" + player + ", wheel=" + wheel + ", date=" + date + '}';
     }
+
+    
 
 }
