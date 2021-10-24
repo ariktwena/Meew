@@ -7,6 +7,7 @@ package dto;
 
 import entities.Field;
 import entities.Spin;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,7 @@ public class SpinDTOsmall {
     private String resultName;
     private double resultValue;
     private PlayerDTO player;
+    private LocalDate date;
 
     public SpinDTOsmall() {
     }
@@ -26,7 +28,8 @@ public class SpinDTOsmall {
         this.id = spin.getId();
         this.resultName = spin.getResultName();
         this.resultValue = spin.getResultValue();
-        this.player = player == null ? null : new PlayerDTO(spin.getPlayer());
+        this.player = spin.getPlayer() == null ? null : new PlayerDTO(spin.getPlayer());
+        this.date = spin.getDate();
     }
     
     public SpinDTOsmall(int fieldNumbers, PlayerDTO player) {
@@ -34,6 +37,7 @@ public class SpinDTOsmall {
         this.resultName = "";
         this.resultValue = -1;
         this.player = player;
+        this.date = LocalDate.now();
     }
 
     public int getId() {
@@ -68,10 +72,20 @@ public class SpinDTOsmall {
         this.player = player;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        this.date = LocalDate.now();
+    }
+
     @Override
     public String toString() {
-        return "SpinDTOsmall{" + "id=" + id + ", resultName=" + resultName + ", resultValue=" + resultValue + ", player=" + player + '}';
+        return "SpinDTOsmall{" + "id=" + id + ", resultName=" + resultName + ", resultValue=" + resultValue + ", player=" + player + ", date=" + date + '}';
     }
+
+    
     
     
 }

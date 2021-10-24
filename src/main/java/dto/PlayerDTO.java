@@ -15,18 +15,21 @@ public class PlayerDTO {
     
     private int id;
     private String playerName;
-
+    private String email;
+    
     public PlayerDTO() {
     }
 
     public PlayerDTO(Player player) {
         this.id = player.getId();
         this.playerName = player.getPlayerName();
+        this.email = player.getEmail();
     }
 
-    public PlayerDTO(String playerName) {
+    public PlayerDTO(String playerName, String email) {
         this.id = -1;
         this.playerName = playerName;
+        this.email = email;
     }
 
     public int getId() {
@@ -45,10 +48,20 @@ public class PlayerDTO {
         this.playerName = playerName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
-        return "PlayerDTO{" + "id=" + id + ", playerName=" + playerName + '}';
+        return "PlayerDTO{" + "id=" + id + ", playerName=" + playerName + ", email=" + email + '}';
     }
+
+    
      
     
 }

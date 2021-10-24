@@ -135,4 +135,11 @@ public class Wheel implements Serializable {
         this.wheelName = wheelName;
     }
 
+    @Override
+    public String toString() {
+        return "Wheel{" + "id=" + id + ", wheelName=" + wheelName + ", fields=" + fields + ", company=" + company + '}';
+    }
+
+    
+    
 }

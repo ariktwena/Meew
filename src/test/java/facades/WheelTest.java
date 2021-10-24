@@ -5,25 +5,16 @@
  */
 package facades;
 
-import dto.DogDTO;
-import dto.OwnerSmallDTO;
-import dto.WalkerSmallDTO;
 import entities.Company;
-import entities.Dog;
 import entities.Field;
-import entities.Owner;
 import entities.Player;
 import entities.Spin;
 import entities.Wheel;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.ws.rs.WebApplicationException;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,14 +28,14 @@ public class WheelTest {
 
     private static EntityManagerFactory emf;
     private static WheelFacade FACADE;
-    private Field f1 = new Field("Car", 200);
-    private Field f2 = new Field("Boat", 400);
-    private Field f3 = new Field("Jepp", 600);
-    private Field f4 = new Field("Chopper", 800);
-    private Field f5 = new Field("Bike", 1000);
-    private Wheel w = new Wheel("Wheel_test_name");
-    private Company c = new Company("test_company");
-    private Player p = new Player("test_player");
+    private final Field f1 = new Field("Car", 200);
+    private final Field f2 = new Field("Boat", 400);
+    private final Field f3 = new Field("Jepp", 600);
+    private final Field f4 = new Field("Chopper", 800);
+    private final Field f5 = new Field("Bike", 1000);
+    private final Wheel w = new Wheel("Wheel_test_name");
+    private final Company c = new Company("test_company");
+    private final Player p = new Player("test_player", "test@test.dk");
     
     public WheelTest() {
     }

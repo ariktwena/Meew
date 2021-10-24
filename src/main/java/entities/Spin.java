@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,6 +49,8 @@ public class Spin implements Serializable {
     private String resultName;
     @Column(name = "resultValue")
     private double resultValue;
+    @Column(name = "date")
+    private LocalDate date;
     
     //***************Many to One****************
     @ManyToOne
@@ -89,6 +92,7 @@ public class Spin implements Serializable {
         this.resultValue = -1;
         this.player = null;
         this.wheel = null;
+        this.date = LocalDate.now();
     }
 
     public int getId() {
@@ -170,6 +174,14 @@ public class Spin implements Serializable {
     public void setResultValue(ArrayList<Field> fields) {
         this.resultValue = fields.get(this.resultNumber).getPrizeValue();
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        this.date = LocalDate.now();
+    }
     
     private int findTop(int fieldNumbers) {
         if (fieldNumbers == 9) {
@@ -225,6 +237,11 @@ public class Spin implements Serializable {
         }
 
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Spin{" + "id=" + id + ", fieldNumbers=" + fieldNumbers + ", arcSize=" + arcSize + ", top=" + top + ", offSet=" + offSet + ", rotate=" + rotate + ", resultNumber=" + resultNumber + ", resultName=" + resultName + ", resultValue=" + resultValue + ", date=" + date + ", player=" + player + ", wheel=" + wheel + '}';
     }
 
     

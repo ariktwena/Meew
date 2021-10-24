@@ -38,6 +38,8 @@ public class Player implements Serializable {
     private int id;
     @Column(name = "playerName", length = 255, nullable = false, unique = false)
     private String playerName;
+    @Column(name = "email", length = 255, nullable = false, unique = false)
+    private String email;
     
     //***************Many to Many****************
     @ManyToMany
@@ -79,8 +81,9 @@ public class Player implements Serializable {
     public Player() {
     }
 
-    public Player(String playerName) {
+    public Player(String playerName, String email) {
         this.playerName = playerName;
+        this.email = email;
         this.wheels = new ArrayList<>();
         this.spins = new ArrayList<>();
     }
@@ -99,6 +102,19 @@ public class Player implements Serializable {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" + "id=" + id + ", playerName=" + playerName + ", email=" + email + '}';
     }
 
    
