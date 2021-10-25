@@ -56,41 +56,41 @@ export default function Wheel(props) {
   const [spinning, setSpinning] = useState(false);
   const [radius] = useState(75);
 
-  const defaultState = {
-    list: [
-      { value: 100, id: 1 },
-      { value: 200, id: 2 },
-      { value: 300, id: 3 },
-      { value: 400, id: 4 },
-      { value: 500, id: 5 },
-    ],
-    // list: [
-    //     "$100",
-    //     "$500",
-    //     "$9,999",
-    //     "$1",
-    //     "$60",
-    //     "$1,000",
-    //     "$4.44",
-    //     "$0",
-    //     "$333"
-    // ],
-    // list: ["$100", "$500", "$9,999", "$1", "$60", "$1,000", "$4.44"],
-    // list: ["$100","$500","$9,999","$1","$60"],
-    radius: 75, // PIXELS
-    rotate: 0, // DEGREES
-    easeOut: 0, // SECONDS
-    angle: 0, // RADIANS
-    top: null, // INDEX
-    offset: null, // RADIANS
-    net: null, // RADIANS
-    result: null, // INDEX
-    spinning: false,
-  };
+  //   const defaultState = {
+  //     list: [
+  //       { value: 100, id: 1 },
+  //       { value: 200, id: 2 },
+  //       { value: 300, id: 3 },
+  //       { value: 400, id: 4 },
+  //       { value: 500, id: 5 },
+  //     ],
+  //     // list: [
+  //     //     "$100",
+  //     //     "$500",
+  //     //     "$9,999",
+  //     //     "$1",
+  //     //     "$60",
+  //     //     "$1,000",
+  //     //     "$4.44",
+  //     //     "$0",
+  //     //     "$333"
+  //     // ],
+  //     // list: ["$100", "$500", "$9,999", "$1", "$60", "$1,000", "$4.44"],
+  //     // list: ["$100","$500","$9,999","$1","$60"],
+  //     radius: 75, // PIXELS
+  //     rotate: 0, // DEGREES
+  //     easeOut: 0, // SECONDS
+  //     angle: 0, // RADIANS
+  //     top: null, // INDEX
+  //     offset: null, // RADIANS
+  //     net: null, // RADIANS
+  //     result: null, // INDEX
+  //     spinning: false,
+  //   };
 
-  const [state, setState] = useState({ ...defaultState });
+  //   const [state, setState] = useState({ ...defaultState });
   const [bomp, setBomp] = useState(0);
-  const [prize, setPrize] = useState("");
+  //   const [prize, setPrize] = useState("");
 
   //   useEffect(() => {
   //     facade.getWheelById(wheelId, (selectedWheel) => {
@@ -113,7 +113,7 @@ export default function Wheel(props) {
   }, []);
 
   useEffect(() => {
-    reset() 
+    reset();
     renderWheel();
     //   renderWheel();
   }, [wheel]);
@@ -136,13 +136,13 @@ export default function Wheel(props) {
     if (easeOut === 0) {
       setSpinning(false);
     } else {
-        setTimeout(() => {
-            //   console.log("Random Spin: ", state.rotate);
-            // getResult(randomSpin);
-            setSpinning(true);
-            console.log("Prize here: ", theSpin.resultName);
-            //   setPrize(theSpin.resultName)
-          }, 1600);
+      setTimeout(() => {
+        //   console.log("Random Spin: ", state.rotate);
+        // getResult(randomSpin);
+        setSpinning(true);
+        console.log("Prize here: ", theSpin.resultName);
+        //   setPrize(theSpin.resultName)
+      }, 1600);
     }
   }, [easeOut]);
 
@@ -179,7 +179,7 @@ export default function Wheel(props) {
     // setState({ ...state });
 
     // get index of starting position of selector
-    topPosition(numOptions, arcSize);
+    // topPosition(numOptions, arcSize);
 
     // dynamically generate sectors from state list
     let angle = 0;
@@ -190,32 +190,32 @@ export default function Wheel(props) {
     }
   };
 
-  const topPosition = (num, angle) => {
-    // set starting index and angle offset based on list length
-    // works upto 9 options
-    let topSpot = null;
-    let degreesOff = null;
-    if (num === 9) {
-      topSpot = 7;
-      degreesOff = Math.PI / 2 - angle * 2;
-    } else if (num === 8) {
-      topSpot = 6;
-      degreesOff = 0;
-    } else if (num <= 7 && num > 4) {
-      topSpot = num - 1;
-      degreesOff = Math.PI / 2 - angle;
-    } else if (num === 4) {
-      topSpot = num - 1;
-      degreesOff = 0;
-    } else if (num <= 3) {
-      topSpot = num;
-      degreesOff = Math.PI / 2;
-    }
+  //   const topPosition = (num, angle) => {
+  //     // set starting index and angle offset based on list length
+  //     // works upto 9 options
+  //     let topSpot = null;
+  //     let degreesOff = null;
+  //     if (num === 9) {
+  //       topSpot = 7;
+  //       degreesOff = Math.PI / 2 - angle * 2;
+  //     } else if (num === 8) {
+  //       topSpot = 6;
+  //       degreesOff = 0;
+  //     } else if (num <= 7 && num > 4) {
+  //       topSpot = num - 1;
+  //       degreesOff = Math.PI / 2 - angle;
+  //     } else if (num === 4) {
+  //       topSpot = num - 1;
+  //       degreesOff = 0;
+  //     } else if (num <= 3) {
+  //       topSpot = num;
+  //       degreesOff = Math.PI / 2;
+  //     }
 
-    // state.top = topSpot - 1;
-    // state.offset = degreesOff;
-    // setState({ ...state });
-  };
+  //     // state.top = topSpot - 1;
+  //     // state.offset = degreesOff;
+  //     // setState({ ...state });
+  //   };
 
   const renderSector = (index, text, start, arc, color) => {
     // create canvas arc for each list element
@@ -289,43 +289,43 @@ export default function Wheel(props) {
     // }, 2000);
   };
 
-  const getResult = (spin) => {
-    // find net rotation and add to offset angle
-    // repeat substraction of inner angle amount from total distance traversed
-    // use count as an index to find value of result from state list
-    const { angle, top, offset, list } = state;
-    let netRotation = ((spin % 360) * Math.PI) / 180; // RADIANS
-    console.log("NetRotate: ", netRotation);
-    let travel = netRotation + offset;
-    console.log("Travel1: ", travel);
-    let count = top + 1;
-    while (travel > 0) {
-      console.log("Angle: ", angle);
-      travel = travel - angle;
-      console.log("Travel2: ", travel);
-      count--;
-    }
-    let result;
-    if (count >= 0) {
-      result = count;
-      console.log("result 1: ", result);
-    } else {
-      // console.log('Length: ', list.length)
-      // console.log(list)
-      result = wheel.fields.length + count;
-      console.log("result 1: ", result);
-    }
+  //   const getResult = (spin) => {
+  //     // find net rotation and add to offset angle
+  //     // repeat substraction of inner angle amount from total distance traversed
+  //     // use count as an index to find value of result from state list
+  //     const { angle, top, offset, list } = state;
+  //     let netRotation = ((spin % 360) * Math.PI) / 180; // RADIANS
+  //     console.log("NetRotate: ", netRotation);
+  //     let travel = netRotation + offset;
+  //     console.log("Travel1: ", travel);
+  //     let count = top + 1;
+  //     while (travel > 0) {
+  //       console.log("Angle: ", angle);
+  //       travel = travel - angle;
+  //       console.log("Travel2: ", travel);
+  //       count--;
+  //     }
+  //     let result;
+  //     if (count >= 0) {
+  //       result = count;
+  //       console.log("result 1: ", result);
+  //     } else {
+  //       // console.log('Length: ', list.length)
+  //       // console.log(list)
+  //       result = wheel.fields.length + count;
+  //       console.log("result 1: ", result);
+  //     }
 
-    // set state variable to display result
-    // const newState = {...state}
-    state.net = netRotation;
-    state.result = result;
-    setState({ ...state });
-    // setState({
-    //     net: netRotation,
-    //     result: result
-    // });
-  };
+  //     // set state variable to display result
+  //     // const newState = {...state}
+  //     state.net = netRotation;
+  //     state.result = result;
+  //     setState({ ...state });
+  //     // setState({
+  //     //     net: netRotation,
+  //     //     result: result
+  //     // });
+  //   };
 
   const reset = () => {
     // reset wheel and result
@@ -341,28 +341,28 @@ export default function Wheel(props) {
     // renderWheel();
   };
 
-  const showResult = () => {
-    return setTimeout(() => {
-      console.log("Result", theSpin.resultName);
-      if (theSpin.resultName === "") {
-        return "";
-      } else {
-        return theSpin.resultName;
-      }
-    }, 2000);
-    // if (state.result === null) {
-    //   return "";
-    // } else {
-    //   return wheel.fields[state.result].prizeName;
-    // }
-  };
+  //   const showResult = () => {
+  //     return setTimeout(() => {
+  //       console.log("Result", theSpin.resultName);
+  //       if (theSpin.resultName === "") {
+  //         return "";
+  //       } else {
+  //         return theSpin.resultName;
+  //       }
+  //     }, 2000);
+  //     // if (state.result === null) {
+  //     //   return "";
+  //     // } else {
+  //     //   return wheel.fields[state.result].prizeName;
+  //     // }
+  //   };
 
   return (
     <div>
       {/* {console.log(player)} */}
       {/* {console.log(game)} */}
       {/* {console.log(wheelId)} */}
-      {/* {console.log(props.wheel)} */}
+      {console.log(wheel)}
       {/* {console.log("Wheel fields length: ", props.wheel.fields.length)} */}
       {console.log("Rorator: ", theSpin.rotate)}
       {console.log("Bomp er: ", bomp)}
@@ -374,7 +374,7 @@ export default function Wheel(props) {
             <div className="App">
               {/* {console.log(state)} */}
               <h1>
-                Prøv Lykken og Vind med "{wheel.wheelName}" &#129337;&#127996;
+                Prøv lykken og vind med "{wheel.wheelName}" &#129337;&#127996;
               </h1>
               {/* <p>
                 <span id="selector">&#9660;</span>

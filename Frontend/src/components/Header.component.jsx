@@ -48,11 +48,11 @@ export default function Header({ isLoggedIn, loginMsg }) {
                 Players
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink activeClassName="active" to="/createwheel">
                 Create Wheel
               </NavLink>
-            </li>
+            </li> */}
           </React.Fragment>
         )}
         <li>

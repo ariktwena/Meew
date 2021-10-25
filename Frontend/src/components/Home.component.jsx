@@ -20,13 +20,12 @@ export default function Home() {
               bruger spinner et Wheel. Siden er kun tilgængelig for admin.
             </p>
             <p>
-              Companies -> Her kan man se de virksomheder som har et Wheel. Siden er kun tilgængelig for admin.
+              Companies -> Her kan man se de virksomheder som har et Wheel.
+              Siden er kun tilgængelig for admin.
             </p>
             <p>
-              Players -> Her kan man se den data man indsamler på spillerne. Siden er kun tilgængelig for admin.
-            </p>
-            <p>
-              Create Wheel -> Her kan man oprette et nyt Wheel for en virksomhed. Siden er kun tilgængelig for admin.
+              Players -> Her kan man se den data man indsamler på spillerne.
+              Siden er kun tilgængelig for admin.
             </p>
           </div>
           <div className="col-md-2"></div>
