@@ -27,8 +27,8 @@ import "./App.css";
 
 function App(props) {
   const { facade, utils } = props;
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isAdmin, setIsAdmin] = useState(false); 
   const [displayError, setDisplayError] = useState("");
   let history = useHistory();
 
@@ -113,13 +113,13 @@ function App(props) {
           isAdmin={isAdmin}
           isLoggedIn={isLoggedIn}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           path="/createwheel"
           component={CreateWheel}
           facade={facade}
           isAdmin={isAdmin}
           isLoggedIn={isLoggedIn}
-        />
+        /> */}
 
         {/* <Route path="/proxy">
           <Proxy facade={facade} />

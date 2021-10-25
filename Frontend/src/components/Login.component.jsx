@@ -21,7 +21,7 @@ export default function Login(props) {
     utils,
     login,
     displayError,
-    clearError
+    clearError,
   } = props;
 
   const init = { username: "", password: "" };
@@ -57,22 +57,28 @@ export default function Login(props) {
   }, []);
 
   return (
-    <div>
-      {/* {console.log(utils)} */}
-      <h2>Login</h2>
-      <form onChange={onChange}>
-        <input placeholder="User Name" type="text" id="username" />{" "}
-        <input placeholder="Password" type="password" id="password" />{" "}
-        <button onClick={performLogin}>{loginMsg}</button>
-        {console.log(displayError)}
-        {displayError.length > 0 ? (
-          <p className="alert alert-danger" style={{ width: "415px" }}>
-            {displayError}
-          </p>
-        ) : (
-          ""
-        )}
-      </form>
+    <div className="container">
+      {/* {console.log(playerList)} */}
+      <div className="row">
+        <div className="col-md-3"></div>
+        <div className="col-md-6">
+          <h2>Login</h2>
+          <form onChange={onChange}>
+            <input placeholder="User Name" type="text" id="username" />{" "}
+            <input placeholder="Password" type="password" id="password" />{" "}
+            <button onClick={performLogin}>{loginMsg}</button>
+            {console.log(displayError)}
+            {displayError.length > 0 ? (
+              <p className="alert alert-danger" style={{ width: "415px" }}>
+                {displayError}
+              </p>
+            ) : (
+              ""
+            )}
+          </form>
+        </div>
+        <div className="col-md-3"></div>
+      </div>
     </div>
   );
 }
