@@ -53,8 +53,9 @@ export default function Wheel(props) {
   };
 
   const [theSpin, setTheSpin] = useState({ ...defaultSpin });
-  const [easeOut] = useState(2)
-  const [spinning, setpinning] = useState(false)
+  const [easeOut] = useState(2);
+  const [spinning, setpinning] = useState(false);
+  const [radius] = useState(75);
 
   const defaultState = {
     list: [
@@ -140,6 +141,7 @@ export default function Wheel(props) {
     resetCanvas();
     // determine number/size of sectors that need to created
     let numOptions = wheel.fields.length;
+    console.log(numOptions);
     let arcSize = (2 * Math.PI) / numOptions;
 
     // state.angle = arcSize;
@@ -191,7 +193,7 @@ export default function Wheel(props) {
     let ctx = canvas.getContext("2d");
     let x = canvas.width / 2;
     let y = canvas.height / 2;
-    let radius = state.radius;
+    // let radius = state.radius;
     let startAngle = start;
     let endAngle = start + arc;
     let angle = index * arc;
@@ -225,8 +227,6 @@ export default function Wheel(props) {
     return `rgba(${r},${g},${b},0.4)`;
   };
 
-
-
   const spin = () => {
     facade.createSpin(player, wheel.id, (createdSpin) => {
       console.log(createdSpin);
@@ -241,15 +241,12 @@ export default function Wheel(props) {
     // state.rotate = randomSpin;
     // state.easeOut = 2;
     // state.spinning = true;
-   
-
-
 
     // calcalute result after wheel stops spinning
     setTimeout(() => {
-    //   console.log("Random Spin: ", state.rotate);
-    //   getResult(randomSpin);
-      console.log('Result here...')
+      //   console.log("Random Spin: ", state.rotate);
+      //   getResult(randomSpin);
+      console.log("Result here...");
     }, 2000);
   };
 
