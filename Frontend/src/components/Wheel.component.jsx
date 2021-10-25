@@ -38,7 +38,6 @@ export default function Wheel(props) {
       id: -1,
       wheelName: "",
       fields: [],
-      players: [],
       company: {
         id: -1,
         companyName: "",
@@ -53,8 +52,8 @@ export default function Wheel(props) {
   };
 
   const [theSpin, setTheSpin] = useState({ ...defaultSpin });
-  const [easeOut] = useState(2);
-  const [spinning, setpinning] = useState(false);
+  const [easeOut, setEaseOut] = useState(0);
+  const [spinning, setSpinning] = useState(false);
   const [radius] = useState(75);
 
   const defaultState = {
@@ -90,6 +89,8 @@ export default function Wheel(props) {
   };
 
   const [state, setState] = useState({ ...defaultState });
+  const [bomp, setBomp] = useState(0);
+  const [prize, setPrize] = useState("");
 
   //   useEffect(() => {
   //     facade.getWheelById(wheelId, (selectedWheel) => {
@@ -107,13 +108,43 @@ export default function Wheel(props) {
 
   useEffect(() => {
     renderWheel();
+    // setTheSpin({ ...defaultSpin });
     //   renderWheel();
   }, []);
 
   useEffect(() => {
+    reset() 
     renderWheel();
     //   renderWheel();
   }, [wheel]);
+
+  useEffect(() => {
+    if (theSpin.rotate > 0) {
+      setBomp(theSpin.rotate - 60); // -60
+    }
+  }, [theSpin]);
+
+  useEffect(() => {
+    if (bomp > 0) {
+      setEaseOut(1);
+    } else {
+      setEaseOut(0);
+    }
+  }, [bomp]);
+
+  useEffect(() => {
+    if (easeOut === 0) {
+      setSpinning(false);
+    } else {
+        setTimeout(() => {
+            //   console.log("Random Spin: ", state.rotate);
+            // getResult(randomSpin);
+            setSpinning(true);
+            console.log("Prize here: ", theSpin.resultName);
+            //   setPrize(theSpin.resultName)
+          }, 1600);
+    }
+  }, [easeOut]);
 
   // const componentDidMount = () => {
   //     // generate canvas wheel on load
@@ -228,9 +259,15 @@ export default function Wheel(props) {
   };
 
   const spin = () => {
+    // setEaseOut(2);
     facade.createSpin(player, wheel.id, (createdSpin) => {
       console.log(createdSpin);
       setTheSpin({ ...createdSpin });
+      //   setBomp(theSpin.rotate - 60); // -60
+      //   console.log(theSpin.rotate)
+      //   showRotator();
+      //   console.log(bomp)
+      //   setSpinning(true);
     });
 
     // set random spin degree and ease out time
@@ -243,11 +280,13 @@ export default function Wheel(props) {
     // state.spinning = true;
 
     // calcalute result after wheel stops spinning
-    setTimeout(() => {
-      //   console.log("Random Spin: ", state.rotate);
-      //   getResult(randomSpin);
-      console.log("Result here...");
-    }, 2000);
+    // setTimeout(() => {
+    //   //   console.log("Random Spin: ", state.rotate);
+    //   // getResult(randomSpin);
+    //   setSpinning(false);
+    //   console.log("Prize here: ", theSpin.resultName);
+    //   //   setPrize(theSpin.resultName)
+    // }, 2000);
   };
 
   const getResult = (spin) => {
@@ -291,25 +330,31 @@ export default function Wheel(props) {
   const reset = () => {
     // reset wheel and result
     // const newState = {...state}
-    state.rotate = 0;
-    state.easeOut = 0;
-    state.result = null;
-    state.spinning = null;
-    setState({ ...state });
-    // setState({
-    //     rotate: 0,
-    //     easeOut: 0,
-    //     result: null,
-    //     spinning: false
-    // });
+    // state.rotate = 0;
+    // state.easeOut = 0;
+    // state.result = null;
+    // state.spinning = null;
+    // setState({ ...state });
+    setEaseOut(0);
+    setBomp(0);
+    setSpinning(false);
+    // renderWheel();
   };
 
   const showResult = () => {
-    if (state.result === null) {
-      return "";
-    } else {
-      return wheel.fields[state.result].prizeName;
-    }
+    return setTimeout(() => {
+      console.log("Result", theSpin.resultName);
+      if (theSpin.resultName === "") {
+        return "";
+      } else {
+        return theSpin.resultName;
+      }
+    }, 2000);
+    // if (state.result === null) {
+    //   return "";
+    // } else {
+    //   return wheel.fields[state.result].prizeName;
+    // }
   };
 
   return (
@@ -317,8 +362,10 @@ export default function Wheel(props) {
       {/* {console.log(player)} */}
       {/* {console.log(game)} */}
       {/* {console.log(wheelId)} */}
-      {console.log(props.wheel)}
-      {console.log("Wheel fields length: ", props.wheel.fields.length)}
+      {/* {console.log(props.wheel)} */}
+      {/* {console.log("Wheel fields length: ", props.wheel.fields.length)} */}
+      {console.log("Rorator: ", theSpin.rotate)}
+      {console.log("Bomp er: ", bomp)}
       <br />
       <div className="container">
         <div className="row">
@@ -341,7 +388,7 @@ export default function Wheel(props) {
                 width="500"
                 height="500"
                 style={{
-                  WebkitTransform: `rotate(${theSpin.rotate}deg)`,
+                  WebkitTransform: `rotate(${bomp}deg)`,
                   WebkitTransition: `-webkit-transform ${easeOut}s ease-out`,
                   marginTop: "-100px",
                 }}
@@ -357,12 +404,12 @@ export default function Wheel(props) {
                 </button>
               )} */}
               <div>
-                {state.spinning ? (
+                {spinning === true ? (
                   <div style={{ marginBottom: "80px" }}>
                     <div className="display">
                       <span id="readout">
                         DU VANDT:{"  "}
-                        <span id="result">{showResult()}</span>
+                        <span id="result">{theSpin.resultName}</span>
                         {/*{console.log(state.list[state.result].value)}*/}
                         {/*<span id="result">{state.list[state.result]}</span>*/}
                         {/* {state.result === null ? ( */}

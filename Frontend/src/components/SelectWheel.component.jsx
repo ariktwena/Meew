@@ -9,7 +9,6 @@ export default function SelectWheel(props) {
     wheelName: "",
     id: -1,
     fields: [],
-    players: [],
     company: {
       companyName: "",
     },
