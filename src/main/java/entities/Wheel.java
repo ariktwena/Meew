@@ -56,28 +56,28 @@ public class Wheel implements Serializable {
     }
     //*****************************************
 
-    //***************Many to Many****************
-    @ManyToMany(mappedBy = "wheels", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    private ArrayList<Player> players;
-
-    public void addPlayer(Player player) {
-        if (player != null) {
-            this.players.add(player);
-            player.getWheels().add(this);
-        }
-    }
-
-    public void removePlayer(Player player) {
-        if (player != null) {
-            this.players.remove(player);
-            player.getWheels().remove(this);
-        }
-    }
-
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-    //*******************************************
+//    //***************Many to Many****************
+//    @ManyToMany(mappedBy = "wheels", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+//    private ArrayList<Player> players;
+//
+//    public void addPlayer(Player player) {
+//        if (player != null) {
+//            this.players.add(player);
+//            player.getWheels().add(this);
+//        }
+//    }
+//
+//    public void removePlayer(Player player) {
+//        if (player != null) {
+//            this.players.remove(player);
+//            player.getWheels().remove(this);
+//        }
+//    }
+//
+//    public ArrayList<Player> getPlayers() {
+//        return players;
+//    }
+//    //*******************************************
 
     //***************Many to One****************
     @ManyToOne
@@ -114,7 +114,7 @@ public class Wheel implements Serializable {
     public Wheel(String wheelName) {
         this.wheelName = wheelName;
         this.fields = new ArrayList<>();
-        this.players = new ArrayList<>();
+//        this.players = new ArrayList<>();
         this.company = null;
         this.spins = new ArrayList<>();
     }

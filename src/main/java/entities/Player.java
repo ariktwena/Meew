@@ -41,26 +41,26 @@ public class Player implements Serializable {
     @Column(name = "email", length = 255, nullable = false, unique = false)
     private String email;
     
-    //***************Many to Many****************
-    @ManyToMany
-    private List<Wheel> wheels;
-
-    public void addWheel(Wheel wheel) {
-        if(wheel != null){
-            this.wheels.add(wheel);
-        }  
-    }
-    
-    public void removeWheel(Wheel wheel) {
-        if(wheel != null){
-            this.wheels.remove(wheel);
-        }  
-    }
-    
-    public List<Wheel> getWheels() {
-        return wheels;
-    }
-    //*******************************************
+//    //***************Many to Many****************
+//    @ManyToMany
+//    private List<Wheel> wheels;
+//
+//    public void addWheel(Wheel wheel) {
+//        if(wheel != null){
+//            this.wheels.add(wheel);
+//        }  
+//    }
+//    
+//    public void removeWheel(Wheel wheel) {
+//        if(wheel != null){
+//            this.wheels.remove(wheel);
+//        }  
+//    }
+//    
+//    public List<Wheel> getWheels() {
+//        return wheels;
+//    }
+//    //*******************************************
     
     //***************One to Many****************
     @OneToMany(mappedBy = "player", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
@@ -84,7 +84,7 @@ public class Player implements Serializable {
     public Player(String playerName, String email) {
         this.playerName = playerName;
         this.email = email;
-        this.wheels = new ArrayList<>();
+//        this.wheels = new ArrayList<>();
         this.spins = new ArrayList<>();
     }
     

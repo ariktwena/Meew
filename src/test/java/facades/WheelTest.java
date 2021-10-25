@@ -74,8 +74,9 @@ public class WheelTest {
             c.addWheel(w);
             em.persist(c);
             
-            w.addPlayer(p);
+//            w.addPlayer(p);
             em.persist(w);
+            em.persist(p);
             
             Spin s = new Spin(w.getFields().size());
             s.setResultName(w.getFields());
