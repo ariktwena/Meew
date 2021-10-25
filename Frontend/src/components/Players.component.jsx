@@ -36,11 +36,8 @@ export default function Players(props) {
     });
   }, []);
 
-  // const [datatable, setDatatable] = React.useState();
-
   return (
     <div className="container">
-      {/* {console.log(playerList)} */}
       <div className="row">
         <div className="col-md-2"></div>
         <div className="col-md-8">

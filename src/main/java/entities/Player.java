@@ -40,30 +40,9 @@ public class Player implements Serializable {
     private String playerName;
     @Column(name = "email", length = 255, nullable = false, unique = false)
     private String email;
-    
-//    //***************Many to Many****************
-//    @ManyToMany
-//    private List<Wheel> wheels;
-//
-//    public void addWheel(Wheel wheel) {
-//        if(wheel != null){
-//            this.wheels.add(wheel);
-//        }  
-//    }
-//    
-//    public void removeWheel(Wheel wheel) {
-//        if(wheel != null){
-//            this.wheels.remove(wheel);
-//        }  
-//    }
-//    
-//    public List<Wheel> getWheels() {
-//        return wheels;
-//    }
-//    //*******************************************
-    
+
     //***************One to Many****************
-    @OneToMany(mappedBy = "player", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
+    @OneToMany(mappedBy = "player", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private ArrayList<Spin> spins;
 
     public void addSpin(Spin spin) {
@@ -84,10 +63,9 @@ public class Player implements Serializable {
     public Player(String playerName, String email) {
         this.playerName = playerName;
         this.email = email;
-//        this.wheels = new ArrayList<>();
         this.spins = new ArrayList<>();
     }
-    
+
     public int getId() {
         return id;
     }
@@ -117,6 +95,4 @@ public class Player implements Serializable {
         return "Player{" + "id=" + id + ", playerName=" + playerName + ", email=" + email + '}';
     }
 
-   
-    
 }

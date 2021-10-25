@@ -20,7 +20,6 @@ export default function SelectWheel(props) {
 
   useEffect(() => {
     facade.getAllWheels((allWheels) => {
-      //   console.log(allWheels);
       setWheelList([...allWheels]);
     });
   }, []);
@@ -29,7 +28,6 @@ export default function SelectWheel(props) {
     if (event.target.value === "-1") {
       setWheel({ ...defaultWheel });
     } else {
-      // console.log(event.target.value);
       facade.getWheelById(event.target.value, (selectedWheel) => {
         setWheel({ ...selectedWheel });
       });
@@ -38,9 +36,6 @@ export default function SelectWheel(props) {
 
   return (
     <div>
-      {/* {console.log(player)} */}
-      {/* {console.log(game)} */}
-      {/* {console.log(wheelId)} */}
       <br />
       <div className="container">
         <div className="row">

@@ -12,11 +12,11 @@ import entities.Player;
  * @author Tweny
  */
 public class PlayerDTO {
-    
+
     private int id;
     private String playerName;
     private String email;
-    
+
     public PlayerDTO() {
     }
 
@@ -61,7 +61,4 @@ public class PlayerDTO {
         return "PlayerDTO{" + "id=" + id + ", playerName=" + playerName + ", email=" + email + '}';
     }
 
-    
-     
-    
 }

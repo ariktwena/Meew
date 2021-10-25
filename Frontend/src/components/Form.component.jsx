@@ -13,13 +13,8 @@ export default function Form(props) {
   const [game, setGame] = useState(false);
 
   const getPlayer = (event) => {
-    // console.log(event.target.value);
     const target = event.target;
-    // console.log(target);
     const value = target.type === "checkbox" ? target.checked : target.value;
-    // console.log(
-    //   "Value: " + target.type === "checkbox" ? target.checked : target.value
-    // );
     const name = target.name;
     player[name] = value;
     setPlayer({ ...player, [name]: value });
@@ -28,7 +23,6 @@ export default function Form(props) {
   const playGame = () => {
     const regularExpresion =
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    // console.log(regularExpresion.test(String(player.email).toLowerCase()));
     if (
       player.playerName.length >= 2 &&
       regularExpresion.test(String(player.email).toLowerCase())
@@ -39,8 +33,6 @@ export default function Form(props) {
 
   return (
     <div>
-      {/* {console.log(player)} */}
-      {/* {console.log(game)} */}
       <br />
       <div className="container">
         {game === true ? (

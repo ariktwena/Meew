@@ -33,7 +33,7 @@ public class Spin implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "fieldNumbers")    
+    @Column(name = "fieldNumbers")
     private int fieldNumbers;
     @Column(name = "arcSize")
     private double arcSize;
@@ -51,7 +51,7 @@ public class Spin implements Serializable {
     private double resultValue;
     @Column(name = "date")
     private LocalDate date;
-    
+
     //***************Many to One****************
     @ManyToOne
     private Player player;
@@ -64,7 +64,7 @@ public class Spin implements Serializable {
         return player;
     }
     //***************************************************************
-    
+
     //***************Many to One****************
     @ManyToOne
     private Wheel wheel;
@@ -158,7 +158,7 @@ public class Spin implements Serializable {
     public void setResultName(String resultName) {
         this.resultName = resultName;
     }
-    
+
     public void setResultName(ArrayList<Field> fields) {
         this.resultName = fields.get(this.resultNumber).getPrizeName();
     }
@@ -182,7 +182,7 @@ public class Spin implements Serializable {
     public void setDate() {
         this.date = LocalDate.now();
     }
-    
+
     private int findTop(int fieldNumbers) {
         if (fieldNumbers == 9) {
             return 7;
@@ -244,5 +244,4 @@ public class Spin implements Serializable {
         return "Spin{" + "id=" + id + ", fieldNumbers=" + fieldNumbers + ", arcSize=" + arcSize + ", top=" + top + ", offSet=" + offSet + ", rotate=" + rotate + ", resultNumber=" + resultNumber + ", resultName=" + resultName + ", resultValue=" + resultValue + ", date=" + date + ", player=" + player + ", wheel=" + wheel + '}';
     }
 
-    
 }

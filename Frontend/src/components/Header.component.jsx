@@ -48,11 +48,6 @@ export default function Header({ isLoggedIn, loginMsg }) {
                 Players
               </NavLink>
             </li>
-            {/* <li>
-              <NavLink activeClassName="active" to="/createwheel">
-                Create Wheel
-              </NavLink>
-            </li> */}
           </React.Fragment>
         )}
         <li>
@@ -61,7 +56,6 @@ export default function Header({ isLoggedIn, loginMsg }) {
           </NavLink>
         </li>
       </ul>
-
       <hr />
     </div>
   );

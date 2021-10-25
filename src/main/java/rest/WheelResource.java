@@ -50,7 +50,6 @@ public class WheelResource {
         return "{\"msg\":\"Hello World\"}";
     }
 
-//    @RolesAllowed("user")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAllWheels() {
@@ -58,7 +57,6 @@ public class WheelResource {
     }
 
     @Path("{id}")
-//    @RolesAllowed("user")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getWheelById(@PathParam("id") int id) {
@@ -98,7 +96,7 @@ public class WheelResource {
         wheelDTO = FACADE.createWheel(wheelDTO);
         return GSON.toJson(wheelDTO);
     }
-    
+
     @Path("{id}")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

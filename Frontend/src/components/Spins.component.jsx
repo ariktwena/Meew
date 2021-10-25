@@ -80,13 +80,9 @@ export default function Spins(props) {
     });
   }, []);
 
-  // const [datatable, setDatatable] = React.useState();
-
   return (
     <div className="container">
-      {/* {console.log(playerList)} */}
       <div className="row">
-        {/* <div className="col-md-1"></div> */}
         <div className="col-md-12">
           <h3 className="text-center">Spin Stats</h3>
           <br />

@@ -26,11 +26,8 @@ export default function Login(props) {
 
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
-  // const [error, setError] = useState(false);
 
   const { state } = useLocation();
-  //Vi sætter den side vi gerne vil til, selv om vi ikke er logget ind
-  //Logout sætter from til "undefined"
   const from = state ? state.from : "/";
 
   const performLogin = (evt) => {

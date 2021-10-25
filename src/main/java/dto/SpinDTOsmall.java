@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @author Tweny
  */
 public class SpinDTOsmall {
+
     private int id;
     private String resultName;
     private double resultValue;
@@ -31,7 +32,7 @@ public class SpinDTOsmall {
         this.player = spin.getPlayer() == null ? null : new PlayerDTO(spin.getPlayer());
         this.date = spin.getDate();
     }
-    
+
     public SpinDTOsmall(int fieldNumbers, PlayerDTO player) {
         this.id = -1;
         this.resultName = "";
@@ -85,7 +86,4 @@ public class SpinDTOsmall {
         return "SpinDTOsmall{" + "id=" + id + ", resultName=" + resultName + ", resultValue=" + resultValue + ", player=" + player + ", date=" + date + '}';
     }
 
-    
-    
-    
 }

@@ -113,21 +113,20 @@ public class LoginEndpointTest {
             em.createNamedQuery("Wheel.deleteAllRows").executeUpdate();
             em.createNamedQuery("Company.deleteAllRows").executeUpdate();
             em.createNamedQuery("Player.deleteAllRows").executeUpdate();
-            
+
             w.addField(f1);
             w.addField(f2);
             w.addField(f3);
             w.addField(f4);
             w.addField(f5);
             em.persist(w);
-            
+
             c.addWheel(w);
             em.persist(c);
-            
-//            w.addPlayer(p);
+
             em.persist(w);
             em.persist(p);
-            
+
             Spin s = new Spin(w.getFields().size());
             s.setResultName(w.getFields());
             s.setResultValue(w.getFields());

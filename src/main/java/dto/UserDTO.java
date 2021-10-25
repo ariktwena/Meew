@@ -12,16 +12,17 @@ import entities.User;
  * @author Tweny
  */
 public class UserDTO {
+
     private String userName;
     private String userPass;
 
     public UserDTO() {
     }
-    
+
     public UserDTO(User user) {
         this.userName = user.getUserName();
     }
-    
+
     public UserDTO(String userName, String userPass) {
         this.userName = userName;
         this.userPass = userPass;
@@ -42,9 +43,5 @@ public class UserDTO {
     public void setUserPass(String userPass) {
         this.userPass = userPass;
     }
-    
-    
-    
-    
-            
+
 }

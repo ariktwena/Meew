@@ -16,11 +16,10 @@ import java.util.ArrayList;
  * @author Tweny
  */
 public class WheelDTO {
-    
+
     private int id;
     private String wheelName;
     private ArrayList<FieldDTO> fields;
-//    private ArrayList<PlayerDTO> players;
     private CompanyDTO company;
     private ArrayList<SpinDTOsmall> spins;
 
@@ -31,7 +30,6 @@ public class WheelDTO {
         this.id = wheel.getId();
         this.wheelName = wheel.getWheelName();
         this.fields = wheel.getFields() == null ? null : makeFieldsDTOlist(wheel.getFields());
-//        this.players = wheel.getPlayers() == null ? null : makePlayersDTOlist(wheel.getPlayers());
         this.company = wheel.getCompany() == null ? null : new CompanyDTO(wheel.getCompany());
         this.spins = wheel.getSpins() == null ? null : makeSpinDTOsmallList(wheel.getSpins());
     }
@@ -40,56 +38,36 @@ public class WheelDTO {
         this.id = -1;
         this.wheelName = wheelName;
         this.fields = fields;
-//        this.players = players;
         this.company = company;
         this.spins = new ArrayList<SpinDTOsmall>();
     }
-    
+
     public WheelDTO(String wheelName, ArrayList<FieldDTO> fields) {
         this.id = -1;
         this.wheelName = wheelName;
         this.fields = fields;
-//        this.players = players;
         this.company = null;
         this.spins = new ArrayList<SpinDTOsmall>();
     }
-    
-//    public WheelDTO(String wheelName, ArrayList<FieldDTO> fields) {
-//        this.id = -1;
-//        this.wheelName = wheelName;
-//        this.fields = fields;
-//        this.players = new ArrayList<PlayerDTO>();
-//        this.spins = new ArrayList<SpinDTOsmall>();
-//    }
-    
+
     public WheelDTO(String wheelName) {
         this.id = -1;
         this.wheelName = wheelName;
         this.fields = new ArrayList<FieldDTO>();;
-//        this.players = new ArrayList<PlayerDTO>();
         this.spins = new ArrayList<SpinDTOsmall>();
     }
-    
-    
-    private ArrayList<FieldDTO> makeFieldsDTOlist(ArrayList<Field> fields){
+
+    private ArrayList<FieldDTO> makeFieldsDTOlist(ArrayList<Field> fields) {
         ArrayList<FieldDTO> fieldDTOs = new ArrayList<>();
-        for(Field f : fields){
+        for (Field f : fields) {
             fieldDTOs.add(new FieldDTO(f));
         }
         return fieldDTOs;
     }
-    
-//    private ArrayList<PlayerDTO> makePlayersDTOlist(ArrayList<Player> players){
-//        ArrayList<PlayerDTO> playerDTOs = new ArrayList<>();
-//        for(Player p : players){
-//            playerDTOs.add(new PlayerDTO(p));
-//        }
-//        return playerDTOs;
-//    }
-    
-    private ArrayList<SpinDTOsmall> makeSpinDTOsmallList(ArrayList<Spin> spins){
+
+    private ArrayList<SpinDTOsmall> makeSpinDTOsmallList(ArrayList<Spin> spins) {
         ArrayList<SpinDTOsmall> SpinDTOsmall = new ArrayList<>();
-        for(Spin s : spins){
+        for (Spin s : spins) {
             SpinDTOsmall.add(new SpinDTOsmall(s));
         }
         return SpinDTOsmall;
@@ -110,14 +88,6 @@ public class WheelDTO {
     public void setFields(ArrayList<FieldDTO> fields) {
         this.fields = fields;
     }
-
-//    public ArrayList<PlayerDTO> getPlayers() {
-//        return players;
-//    }
-
-//    public void setPlayers(ArrayList<PlayerDTO> players) {
-//        this.players = players;
-//    }
 
     public CompanyDTO getCompany() {
         return company;
@@ -147,7 +117,5 @@ public class WheelDTO {
     public String toString() {
         return "WheelDTO{" + "id=" + id + ", wheelName=" + wheelName + ", fields=" + fields + ", company=" + company + ", spins=" + spins + '}';
     }
-    
-    
-    
+
 }

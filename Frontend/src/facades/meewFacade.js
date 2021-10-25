@@ -2,11 +2,6 @@ import utils from "../utils";
 import { SERVER_URL } from "../settings";
 
 function apiFacade() {
-  //OBSERVE fetchAny takes a url and a callback. The callback handles the data from the response body.
-
-  /**
-   * REST API
-   */
    function getAllWheels(callback) {
     utils.fetchAny(SERVER_URL + "/api/wheel", callback);
   }

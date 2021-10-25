@@ -48,7 +48,6 @@ public class WheelTesterPersist {
         
         
         Player p = new Player("test_player", "test@test.dk");
-//        w.addPlayer(p);
         em.persist(w);
         em.persist(p);
         

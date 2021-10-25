@@ -36,16 +36,16 @@ public class WheelTest {
     private final Wheel w = new Wheel("Wheel_test_name");
     private final Company c = new Company("test_company");
     private final Player p = new Player("test_player", "test@test.dk");
-    
+
     public WheelTest() {
     }
-    
+
     @BeforeAll
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactoryForTest();
         FACADE = WheelFacade.getFacade(emf);
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
 //        Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
@@ -63,34 +63,33 @@ public class WheelTest {
             em.createNamedQuery("Wheel.deleteAllRows").executeUpdate();
             em.createNamedQuery("Company.deleteAllRows").executeUpdate();
             em.createNamedQuery("Player.deleteAllRows").executeUpdate();
-            
+
             w.addField(f1);
             w.addField(f2);
             w.addField(f3);
             w.addField(f4);
             w.addField(f5);
             em.persist(w);
-            
+
             c.addWheel(w);
             em.persist(c);
-            
-//            w.addPlayer(p);
+
             em.persist(w);
             em.persist(p);
-            
+
             Spin s = new Spin(w.getFields().size());
             s.setResultName(w.getFields());
             s.setResultValue(w.getFields());
             s.setPlayer(p);
             s.setWheel(w);
             em.persist(s);
-            
+
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
-    
+
     @AfterEach
     public void tearDown() {
 //        Remove any data after each test was run
@@ -107,13 +106,12 @@ public class WheelTest {
             s.setPlayer(p);
             s.setWheel(w);
             em.persist(s);
-            
+
             em.getTransaction().commit();
         } finally {
             em.close();
         }
         assertEquals(2, FACADE.getAllSpins().size(), "Expects one rows in the database");
     }
-   
 
 }
