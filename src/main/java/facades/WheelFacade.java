@@ -130,25 +130,37 @@ public class WheelFacade implements IWheelFacade {
         }
 
         EntityManager em = emf.createEntityManager();
-
+        
         Wheel wheel = em.find(Wheel.class, wheelID);
         
-        boolean playerAldreadyExists = doesPlayerExistInDB(playerDTO.getPlayerName(), playerDTO.getEmail());
+//        boolean playerAldreadyExists = doesPlayerExistInDB(playerDTO.getPlayerName(), playerDTO.getEmail());
+//        if(playerAldreadyExists){
         Player player = getPlayerByName(playerDTO.getPlayerName(), playerDTO.getEmail());
+//        }
 
-        Spin spin = new Spin(wheel.getFields().size());
-        spin.setResultName(wheel.getFields());
-        spin.setResultValue(wheel.getFields());
-        wheel.addPlayer(player);
-        spin.setPlayer(player);
-        spin.setWheel(wheel);
+        
 
         try {
             em.getTransaction().begin();
+            
+            
+//            if(!playerAldreadyExists){
+//                player = new Player(playerDTO.getPlayerName(), playerDTO.getEmail());
+//                em.persist(player);
+//            }
+            System.out.println(player);
+            
+            Spin spin = new Spin(wheel.getFields().size());
+            spin.setResultName(wheel.getFields());
+            spin.setResultValue(wheel.getFields());
+//            wheel.addPlayer(player);
+            spin.setPlayer(player);
+            spin.setWheel(wheel);
+            
             em.persist(spin);
-            if(!playerAldreadyExists){
-                em.merge(wheel);
-            }
+//            if(!playerAldreadyExists){
+//                em.merge(wheel);
+//            }
             em.getTransaction().commit();
             return new SpinDTO(spin);
         } catch (NoResultException ex) {
@@ -229,6 +241,7 @@ public class WheelFacade implements IWheelFacade {
             em.persist(player);
             em.getTransaction().commit();
             return player;
+//            throw new WebApplicationException("No player with the name: " + name + " exists", 404);
         } catch (RuntimeException ex) {
             throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
         } finally {
@@ -245,9 +258,11 @@ public class WheelFacade implements IWheelFacade {
             return true;
         } catch (NoResultException ex) {
             return false;
-        } catch (RuntimeException ex) {
-            throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
-        } finally {
+        } 
+//        catch (RuntimeException ex) {
+//            throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
+//        } 
+        finally {
             em.close();
         }
     }

@@ -48,8 +48,9 @@ public class WheelTesterPersist {
         
         
         Player p = new Player("test_player", "test@test.dk");
-        w.addPlayer(p);
+//        w.addPlayer(p);
         em.persist(w);
+        em.persist(p);
         
         Spin s = new Spin(w.getFields().size());
 //        SpinDTO sdto = new SpinDTO(s);
