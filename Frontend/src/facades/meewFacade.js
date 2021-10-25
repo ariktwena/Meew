@@ -32,6 +32,8 @@ function apiFacade() {
   }
 
   function createSpin(player, id, callback) {
+    console.log(player)
+    console.log(id)
     utils.fetchAny(SERVER_URL + "/api/wheel/" + id, callback, "POST", player);
   }
 

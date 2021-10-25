@@ -7,16 +7,19 @@ import {
   // NavLink,
   // Redirect,
   // useLocation,
-  Prompt,
-  useRouteMatch,
-  useParams,
+  // Prompt,
+  // useRouteMatch,
+  // useParams,
   useHistory,
 } from "react-router-dom";
+
 import Header from "./components/Header.component";
 import Home from "./components/Home.component";
-import Proxy from "./components/Proxy.component";
-import Rest from "./components/Rest.component";
-
+import Form from "./components/Form.component";
+import Spins from "./components/Spins.component";
+import Companies from "./components/Companies.component";
+import Players from "./components/Players.component";
+import CreateWheel from "./components/CreateWheel.component";
 import NoMatch from "./components/NoMatch.component";
 import Login from "./components/Login.component";
 import PrivateRoute from "./components/PrivateRoute.component";
@@ -28,7 +31,6 @@ function App(props) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [displayError, setDisplayError] = useState("");
   let history = useHistory();
-
 
   const setLoginStatus = (status, pageToGoTo) => {
     // console.log(pageToGoTo)
@@ -42,25 +44,24 @@ function App(props) {
   };
 
   const login = (user, pass, from) => {
-    /*TODO*/
     utils
       .login(user, pass)
       .then((res) => {
         const role = localStorage.getItem("role");
         if (role === "admin") {
-          console.log("YES");
+          // console.log("isAdmin: true");
           setIsAdmin(true);
         } else {
-          console.log("NO");
+          // console.log("isAdmin: false");
           setIsAdmin(false);
         }
         setLoginStatus(true, from);
         // setIsLoggedIn(true);
-        setDisplayError("");  
+        setDisplayError("");
       })
       .catch((error) => {
         error.fullError.then((errorMsg) => {
-          console.log(errorMsg);
+          // console.log(errorMsg);
           setDisplayError(
             // "Error: Status: " +
             //   errorMsg.code +
@@ -86,21 +87,52 @@ function App(props) {
       />
       <Switch>
         <Route exact path="/">
-          <Home utils={utils} isLoggedIn={isLoggedIn} />
+          <Home />
         </Route>
+        <Route path="/wheel">
+          <Form facade={facade} />
+        </Route>
+        <PrivateRoute
+          path="/spins"
+          component={Spins}
+          facade={facade}
+          isAdmin={isAdmin}
+          isLoggedIn={isLoggedIn}
+        />
+        <PrivateRoute
+          path="/companies"
+          component={Companies}
+          facade={facade}
+          isAdmin={isAdmin}
+          isLoggedIn={isLoggedIn}
+        />
+        <PrivateRoute
+          path="/players"
+          component={Players}
+          facade={facade}
+          isAdmin={isAdmin}
+          isLoggedIn={isLoggedIn}
+        />
+        <PrivateRoute
+          path="/createwheel"
+          component={CreateWheel}
+          facade={facade}
+          isAdmin={isAdmin}
+          isLoggedIn={isLoggedIn}
+        />
 
-        <Route path="/proxy">
+        {/* <Route path="/proxy">
           <Proxy facade={facade} />
-        </Route>
+        </Route> */}
         {/* <PrivateRoute
           path="/proxy"
           isLoggedIn={isLoggedIn}
           component={Proxy}
           facade={facade}
         /> */}
-        <Route path="/rest">
+        {/* <Route path="/rest">
           <Rest facade={facade} isAdmin={isAdmin} />
-        </Route>
+        </Route> */}
         {/* <PrivateRoute
           path="/rest"
           isLoggedIn={isLoggedIn}

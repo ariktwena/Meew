@@ -15,14 +15,14 @@ import {
 
 export default function PrivateRoute({
   component: Component,
-  isLoggedIn,
+  isLoggedIn, isAdmin,
   ...props
 }) {
   const { pathname } = useLocation();
   return (
     <Route>
       {/* {console.log(pathname)} */}
-      {isLoggedIn === true ? (
+      {isLoggedIn === true && isAdmin === true ? (
         <Component {...props} />
       ) : (
         <Redirect to={{ pathname: "/login-out", state: { from: pathname } }} />

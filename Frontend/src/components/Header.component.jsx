@@ -7,10 +7,10 @@ import {
   NavLink,
   // Redirect,
   //   useLocation,
-  Prompt,
-  useRouteMatch,
-  useParams,
-  useHistory,
+  // Prompt,
+  // useRouteMatch,
+  // useParams,
+  // useHistory,
 } from "react-router-dom";
 
 export default function Header({ isLoggedIn, loginMsg }) {
@@ -24,17 +24,33 @@ export default function Header({ isLoggedIn, loginMsg }) {
         </li>
 
         {isLoggedIn === false ? (
-          ""
+          <React.Fragment>
+            <li>
+              <NavLink activeClassName="active" to="/wheel">
+                Wheel
+              </NavLink>
+            </li>
+          </React.Fragment>
         ) : (
           <React.Fragment>
-            {/* <li>
-              <NavLink activeClassName="active" to="/proxy">
-                Proxy
-              </NavLink>
-            </li> */}
             <li>
-              <NavLink activeClassName="active" to="/rest">
-                Rest
+              <NavLink activeClassName="active" to="/spins">
+                Spins
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="active" to="/companies">
+                Companies
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="active" to="/players">
+                Players
+              </NavLink>
+            </li>
+            <li>
+              <NavLink activeClassName="active" to="/createwheel">
+                Create Wheel
               </NavLink>
             </li>
           </React.Fragment>

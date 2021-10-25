@@ -52,7 +52,7 @@ function apiUtils() {
         if (err.status) {
           err.fullError.then((e) => console.log(e.detail));
         } else {
-          console.log("Network error");
+          // console.log("Network error");
         }
       });
   }
@@ -83,7 +83,7 @@ function apiUtils() {
 
   const setToken = (token) => {
     const tokenData = jwt_decode(token);
-    console.log(tokenData);
+    // console.log(tokenData);
     localStorage.setItem("role", tokenData.roles);
     // if (localStorage.getItem("role") === "admin") {
     //   console.log("YES");
@@ -121,5 +121,3 @@ function apiUtils() {
 
 const utils = apiUtils();
 export default utils;
-
-//   export default { fetchAny, login, fetchWelcomeData, makeOptions };

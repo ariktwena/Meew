@@ -100,7 +100,6 @@ public class WheelResource {
     }
     
     @Path("{id}")
-    @RolesAllowed("admin")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

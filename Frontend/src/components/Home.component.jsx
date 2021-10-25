@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Home(props) {
+export default function Home() {
   return (
     <div>
       <br />
@@ -16,8 +16,17 @@ export default function Home(props) {
             </p>
             <p>Wheel -> Her kan man spinne et Wheel. Denne side er offentlig</p>
             <p>
-              Stat -> Her man man se den data der bliver indsamlet hver gang en
+              Spins -> Her kan man se den data der bliver indsamlet hver gang en
               bruger spinner et Wheel. Siden er kun tilgængelig for admin.
+            </p>
+            <p>
+              Companies -> Her kan man se de virksomheder som har et Wheel. Siden er kun tilgængelig for admin.
+            </p>
+            <p>
+              Players -> Her kan man se den data man indsamler på spillerne. Siden er kun tilgængelig for admin.
+            </p>
+            <p>
+              Create Wheel -> Her kan man oprette et nyt Wheel for en virksomhed. Siden er kun tilgængelig for admin.
             </p>
           </div>
           <div className="col-md-2"></div>
