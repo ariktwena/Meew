@@ -53,6 +53,8 @@ export default function Wheel(props) {
   };
 
   const [theSpin, setTheSpin] = useState({ ...defaultSpin });
+  const [easeOut] = useState(2)
+  const [spinning, setpinning] = useState(false)
 
   const defaultState = {
     list: [
@@ -342,8 +344,8 @@ export default function Wheel(props) {
                 width="500"
                 height="500"
                 style={{
-                  WebkitTransform: `rotate(${state.rotate}deg)`,
-                  WebkitTransition: `-webkit-transform ${state.easeOut}s ease-out`,
+                  WebkitTransform: `rotate(${theSpin.rotate}deg)`,
+                  WebkitTransition: `-webkit-transform ${easeOut}s ease-out`,
                   marginTop: "-100px",
                 }}
               />

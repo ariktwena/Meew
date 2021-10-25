@@ -132,8 +132,9 @@ public class WheelFacade implements IWheelFacade {
         EntityManager em = emf.createEntityManager();
 
         Wheel wheel = em.find(Wheel.class, wheelID);
-
-        Player player = getPlaterByName(playerDTO.getPlayerName(), playerDTO.getEmail());
+        
+        boolean playerAldreadyExists = doesPlayerExistInDB(playerDTO.getPlayerName(), playerDTO.getEmail());
+        Player player = getPlayerByName(playerDTO.getPlayerName(), playerDTO.getEmail());
 
         Spin spin = new Spin(wheel.getFields().size());
         spin.setResultName(wheel.getFields());
@@ -145,14 +146,18 @@ public class WheelFacade implements IWheelFacade {
         try {
             em.getTransaction().begin();
             em.persist(spin);
-            em.merge(wheel);
+            if(!playerAldreadyExists){
+                em.merge(wheel);
+            }
             em.getTransaction().commit();
             return new SpinDTO(spin);
         } catch (NoResultException ex) {
             throw new WebApplicationException("No Wheel with id: " + wheelID + " exists", 404);
-        } catch (RuntimeException ex) {
-            throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
-        } finally {
+        } 
+//        catch (RuntimeException ex) {
+//            throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
+//        } 
+        finally {
             em.close();
         }
     }
@@ -211,7 +216,7 @@ public class WheelFacade implements IWheelFacade {
         }
     }
 
-    private Player getPlaterByName(String name, String email) {
+    private Player getPlayerByName(String name, String email) {
         EntityManager em = emf.createEntityManager();
         try {
             Query query = em.createQuery("SELECT p FROM Player p WHERE p.playerName = :name ", Player.class);
@@ -224,6 +229,22 @@ public class WheelFacade implements IWheelFacade {
             em.persist(player);
             em.getTransaction().commit();
             return player;
+        } catch (RuntimeException ex) {
+            throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
+        } finally {
+            em.close();
+        }
+    }
+    
+    private boolean doesPlayerExistInDB(String name, String email) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query query = em.createQuery("SELECT p FROM Player p WHERE p.playerName = :name ", Player.class);
+            query.setParameter("name", name);
+            Player player = (Player) query.getSingleResult();
+            return true;
+        } catch (NoResultException ex) {
+            return false;
         } catch (RuntimeException ex) {
             throw new WebApplicationException("Internal Server Problem. We are sorry for the inconvenience", 500);
         } finally {
