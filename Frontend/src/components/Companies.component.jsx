@@ -30,7 +30,6 @@ export default function Companies(props) {
 
   useEffect(() => {
     facade.getAllCompanies((list) => {
-      console.log(list);
       defaultCompanyList.rows = [...list];
       setCompanyList({ ...defaultCompanyList });
     });

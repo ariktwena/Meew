@@ -55,7 +55,6 @@ export default function Login(props) {
 
   return (
     <div className="container">
-      {/* {console.log(playerList)} */}
       <div className="row">
         <div className="col-md-3"></div>
         <div className="col-md-6">

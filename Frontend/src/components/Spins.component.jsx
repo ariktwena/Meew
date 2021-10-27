@@ -7,7 +7,7 @@ export default function Spins(props) {
   const defaultSpinList = {
     columns: [
       {
-        label: "Id",
+        label: "Spin Id",
         field: "id",
         width: 150,
         sort: "enabled",
@@ -64,6 +64,30 @@ export default function Spins(props) {
         sort: "enabled",
         width: 270,
       },
+      {
+        label: "Player Name",
+        field: "playerName",
+        sort: "enabled",
+        width: 270,
+      },
+      {
+        label: "Player Id",
+        field: "playerId",
+        sort: "enabled",
+        width: 270,
+      },
+      {
+        label: "Wheel Id",
+        field: "wheelId",
+        sort: "enabled",
+        width: 270,
+      },
+      {
+        label: "Wheel Name",
+        field: "wheelName",
+        sort: "enabled",
+        width: 270,
+      },
     ],
     rows: [],
   };
@@ -71,11 +95,19 @@ export default function Spins(props) {
   const [spinList, setSpinList] = useState({ ...defaultSpinList });
 
   useEffect(() => {
-    console.log("hello");
-
     facade.getAllSpins((list) => {
-      console.log(list);
-      defaultSpinList.rows = [...list];
+      let x;
+      let editedList = list.map(
+        (s) =>
+          (x = {
+            ...s,
+            playerId: s.player.id,
+            playerName: s.player.playerName,
+            wheelId: s.wheel.id,
+            wheelName: s.wheel.wheelName,
+          })
+      );
+      defaultSpinList.rows = [...editedList];
       setSpinList({ ...defaultSpinList });
     });
   }, []);
@@ -95,7 +127,6 @@ export default function Spins(props) {
             fullPagination
           />
         </div>
-        {/* <div className="col-md-1"></div> */}
       </div>
     </div>
   );

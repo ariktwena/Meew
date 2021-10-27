@@ -1,6 +1,6 @@
-<h1 align="center">Welcome to 3 Semester Spring 2021 - Exam 👋</h1>
+<h1 align="center">MeeW Case Frontend</h1>
 
-<h4 align="center">Exam for 3. Semester of Spring 2021 </h4>
+<h4 align="center">Job Interview </h4>
 
 ## Author
 
@@ -8,19 +8,6 @@
 
 * [Github](https://github.com/ariktwena)
 * [LinkedIn](https://www.linkedin.com/in/arik-gaarde-nielsen-3a54255/)
-
-# Deployed project
-
-#### 🖥 [FrontEnd](https://codeops.dk/)
-
-#### 💾 [BackEnd](https://codergram.dk/startcode_exam/)
-
-#### 🖥 [GitHub FrontEnd](https://github.com/ariktwena/Frontend_PROXY_exam)
-
-#### 💾 [GitHub BackEnd](https://github.com/ariktwena/BackEnd_PROXY_Exam)
-
-#### 👮🏽‍♂️ [Travis](https://www.travis-ci.com/github/ariktwena/BackEnd_PROXY_Exam)
-
 
 # Getting Started with Create React App
 
@@ -74,7 +61,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Files that can/should be changed
 
 * The file settings.js holds URLs for fetching. 
-* The file examFacade.js handles fetches to the backend
+* The file meewFacade.js handles fetches to the backend
 * The file Home.component.jsx is the welcome page
 
 ## Learn More

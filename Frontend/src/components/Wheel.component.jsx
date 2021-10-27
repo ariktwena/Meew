@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/wheel.css";
 
 export default function Wheel(props) {
-  const { facade, player, game, wheelId, wheel } = props;
+  const { facade, player, wheel } = props;
 
   const defaultSpin = {
     id: -1,
@@ -53,7 +53,11 @@ export default function Wheel(props) {
 
   useEffect(() => {
     if (theSpin.rotate > 0) {
-      setBomp(theSpin.rotate - 60);
+      if (theSpin.fieldNumbers >= 6) {
+        setBomp(theSpin.rotate - 60);
+      } else {
+        setBomp(theSpin.rotate - 100);
+      }
     }
   }, [theSpin]);
 

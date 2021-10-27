@@ -7,14 +7,20 @@ export default function Players(props) {
   const defaultPlayerList = {
     columns: [
       {
-        label: "Name",
-        field: "playerName",
+        label: "Id",
+        field: "id",
         width: 150,
         sort: "enabled",
         attributes: {
           "aria-controls": "DataTable",
           "aria-label": "Name",
         },
+      },
+      {
+        label: "Name",
+        field: "playerName",
+        width: 150,
+        sort: "enabled",
       },
       {
         label: "Email",
@@ -30,7 +36,6 @@ export default function Players(props) {
 
   useEffect(() => {
     facade.getAllPlayers((list) => {
-      console.log(list);
       defaultPlayerList.rows = [...list];
       setPlayerList({ ...defaultPlayerList });
     });

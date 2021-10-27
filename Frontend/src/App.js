@@ -65,7 +65,6 @@ function App(props) {
 
   return (
     <div>
-      {console.log(isAdmin)}
       <Header
         loginMsg={isLoggedIn ? "Logout" : "Login"}
         isLoggedIn={isLoggedIn}
