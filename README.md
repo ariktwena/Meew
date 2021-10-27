@@ -17,7 +17,7 @@
 
 #### 💾 [BackEnd](https://codergram.dk/Meew/)
 
-#### 🖥 [GitHub FrontEnd](https://github.com/ariktwena/Meew/tree/Develop/Frontend)
+#### 🖥 [GitHub FrontEnd](https://github.com/ariktwena/Meew/tree/master/Frontend)
 
 #### 💾 [GitHub BackEnd](https://github.com/ariktwena/Meew)
 
