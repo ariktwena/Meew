@@ -12,6 +12,7 @@ import entities.Field;
  * @author Tweny
  */
 public class FieldDTO {
+
     private int id;
     private String prizeName;
     private int prizeValue;
@@ -59,6 +60,5 @@ public class FieldDTO {
     public String toString() {
         return "FieldDTO{" + "id=" + id + ", prizeName=" + prizeName + ", prizeValue=" + prizeValue + '}';
     }
-    
-    
+
 }

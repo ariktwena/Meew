@@ -35,7 +35,7 @@ public class Field implements Serializable {
     private String prizeName;
     @Column(name = "prizeValue", length = 255, nullable = false, unique = false)
     private int prizeValue;
-    
+
     //***************Many to One****************
     @ManyToOne
     private Wheel wheel;
@@ -57,7 +57,6 @@ public class Field implements Serializable {
         this.prizeValue = prizeValue;
         this.wheel = null;
     }
-    
 
     public int getId() {
         return id;
@@ -83,6 +82,4 @@ public class Field implements Serializable {
         this.prizeValue = prizeValue;
     }
 
- 
-    
 }

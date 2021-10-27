@@ -104,6 +104,4 @@ public class User implements Serializable {
         return "User{" + "userName=" + userName + ", userPass=" + userPass + ", userSalt=" + userSalt + '}';
     }
 
-    
-    
 }

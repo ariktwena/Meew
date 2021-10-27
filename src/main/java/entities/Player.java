@@ -38,30 +38,11 @@ public class Player implements Serializable {
     private int id;
     @Column(name = "playerName", length = 255, nullable = false, unique = false)
     private String playerName;
-    
-    //***************Many to Many****************
-    @ManyToMany
-    private List<Wheel> wheels;
+    @Column(name = "email", length = 255, nullable = false, unique = false)
+    private String email;
 
-    public void addWheel(Wheel wheel) {
-        if(wheel != null){
-            this.wheels.add(wheel);
-        }  
-    }
-    
-    public void removeWheel(Wheel wheel) {
-        if(wheel != null){
-            this.wheels.remove(wheel);
-        }  
-    }
-    
-    public List<Wheel> getWheels() {
-        return wheels;
-    }
-    //*******************************************
-    
     //***************One to Many****************
-    @OneToMany(mappedBy = "player", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
+    @OneToMany(mappedBy = "player", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private ArrayList<Spin> spins;
 
     public void addSpin(Spin spin) {
@@ -79,12 +60,12 @@ public class Player implements Serializable {
     public Player() {
     }
 
-    public Player(String playerName) {
+    public Player(String playerName, String email) {
         this.playerName = playerName;
-        this.wheels = new ArrayList<>();
+        this.email = email;
         this.spins = new ArrayList<>();
     }
-    
+
     public int getId() {
         return id;
     }
@@ -101,6 +82,17 @@ public class Player implements Serializable {
         this.playerName = playerName;
     }
 
-   
-    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" + "id=" + id + ", playerName=" + playerName + ", email=" + email + '}';
+    }
+
 }

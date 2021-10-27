@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ public class Spin implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "fieldNumbers")    
+    @Column(name = "fieldNumbers")
     private int fieldNumbers;
     @Column(name = "arcSize")
     private double arcSize;
@@ -47,8 +48,10 @@ public class Spin implements Serializable {
     @Column(name = "resultName")
     private String resultName;
     @Column(name = "resultValue")
-    private int resultValue;
-    
+    private double resultValue;
+    @Column(name = "date")
+    private LocalDate date;
+
     //***************Many to One****************
     @ManyToOne
     private Player player;
@@ -59,6 +62,19 @@ public class Spin implements Serializable {
 
     public Player getPlayer() {
         return player;
+    }
+    //***************************************************************
+
+    //***************Many to One****************
+    @ManyToOne
+    private Wheel wheel;
+
+    public void setWheel(Wheel wheel) {
+        this.wheel = wheel;
+    }
+
+    public Wheel getWheel() {
+        return wheel;
     }
     //***************************************************************
 
@@ -75,6 +91,8 @@ public class Spin implements Serializable {
         this.resultName = "";
         this.resultValue = -1;
         this.player = null;
+        this.wheel = null;
+        this.date = LocalDate.now();
     }
 
     public int getId() {
@@ -140,12 +158,12 @@ public class Spin implements Serializable {
     public void setResultName(String resultName) {
         this.resultName = resultName;
     }
-    
+
     public void setResultName(ArrayList<Field> fields) {
         this.resultName = fields.get(this.resultNumber).getPrizeName();
     }
 
-    public int getResultValue() {
+    public double getResultValue() {
         return resultValue;
     }
 
@@ -156,7 +174,15 @@ public class Spin implements Serializable {
     public void setResultValue(ArrayList<Field> fields) {
         this.resultValue = fields.get(this.resultNumber).getPrizeValue();
     }
-    
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        this.date = LocalDate.now();
+    }
+
     private int findTop(int fieldNumbers) {
         if (fieldNumbers == 9) {
             return 7;
@@ -213,5 +239,9 @@ public class Spin implements Serializable {
         return result;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Spin{" + "id=" + id + ", fieldNumbers=" + fieldNumbers + ", arcSize=" + arcSize + ", top=" + top + ", offSet=" + offSet + ", rotate=" + rotate + ", resultNumber=" + resultNumber + ", resultName=" + resultName + ", resultValue=" + resultValue + ", date=" + date + ", player=" + player + ", wheel=" + wheel + '}';
+    }
+
 }

@@ -38,7 +38,7 @@ public class Company implements Serializable {
     private String companyName;
 
     //***************One to Many****************
-    @OneToMany(mappedBy = "company", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
+    @OneToMany(mappedBy = "company", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private ArrayList<Wheel> wheels;
 
     public void addWheel(Wheel wheel) {
@@ -52,7 +52,7 @@ public class Company implements Serializable {
         return wheels;
     }
     //*****************************************
-    
+
     public Company() {
     }
 

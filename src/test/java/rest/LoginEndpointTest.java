@@ -2,25 +2,21 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dto.DogDTO;
-import dto.OwnerSmallDTO;
-import dto.PersonDTO;
-import dto.WalkerSmallDTO;
-import entities.Dog;
-import entities.Hobby;
-import entities.Job;
-import entities.NickName;
-import entities.Owner;
-import entities.Person;
+import dto.SpinDTO;
+import entities.Company;
+import entities.Field;
+import entities.Player;
 import entities.User;
 import entities.Role;
-import entities.Walker;
+import entities.Spin;
+import entities.Wheel;
 
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -51,13 +47,14 @@ public class LoginEndpointTest {
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
 
-    private Dog d1 = new Dog("Dog 1", "Breed 1", "image 1", Dog.Gender.M, "01-01-2001");
-    private Dog d2 = new Dog("Dog 2", "Breed 2", "image 2", Dog.Gender.F, "02-02-2002");
-    private Walker w1 = new Walker("Walker 1", "Address 1", "11111111");
-    private Walker w2 = new Walker("Walker 2", "Address 2", "22222222");
-    private Owner o1 = new Owner("Owner 1", "Address 1", "11111111");
-    private Owner o2 = new Owner("Owner 2", "Address 2", "22222222");
-    private Owner o3 = new Owner("Owner 9", "Address 9", "99999999");
+    private final Field f1 = new Field("Car", 200);
+    private final Field f2 = new Field("Boat", 400);
+    private final Field f3 = new Field("Jepp", 600);
+    private final Field f4 = new Field("Chopper", 800);
+    private final Field f5 = new Field("Bike", 1000);
+    private final Wheel w = new Wheel("Wheel_test_name");
+    private final Company c = new Company("test_company");
+    private final Player p = new Player("test_player", "test@test.dk");
 
     static HttpServer startServer() {
         ResourceConfig rc = ResourceConfig.forApplication(new ApplicationConfig());
@@ -111,34 +108,31 @@ public class LoginEndpointTest {
             em.persist(admin);
             em.persist(both);
 
-            em.createNamedQuery("Dog.deleteAllRows").executeUpdate();
-            em.createNamedQuery("Owner.deleteAllRows").executeUpdate();
-            em.createNamedQuery("Walker.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Spin.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Field.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Wheel.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Company.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Player.deleteAllRows").executeUpdate();
 
-            em.persist(d1);
-            em.persist(d2);
+            w.addField(f1);
+            w.addField(f2);
+            w.addField(f3);
+            w.addField(f4);
+            w.addField(f5);
+            em.persist(w);
 
-            em.persist(o1);
-            em.persist(o2);
+            c.addWheel(w);
+            em.persist(c);
 
-            o1.addDog(d1);
-            em.merge(o1);
+            em.persist(w);
+            em.persist(p);
 
-            o2.addDog(d2);
-            em.merge(o2);
-
-            em.persist(w1);
-            em.persist(w2);
-
-            d1.addWalkers(w1);
-            em.merge(d1);
-
-            d2.addWalkers(w2);
-            em.merge(d2);
-
-            em.persist(o3);
-
-            //System.out.println("Saved test data to database");
+            Spin s = new Spin(w.getFields().size());
+            s.setResultName(w.getFields());
+            s.setResultValue(w.getFields());
+            s.setPlayer(p);
+            s.setWheel(w);
+            em.persist(s);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -282,234 +276,16 @@ public class LoginEndpointTest {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @Test
-    public void testGetAllWalkers_US1() {
-
-        login("user", "test");
+    public void test_US3() {
 
         given()
                 .contentType("application/json")
                 .header("x-access-token", securityToken)
-                .get("/dogs/walkers")
+                .get("/wheel/{id}", w.getId())
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("name", hasItems("Walker 1", "Walker 2"));
-    }
-
-    @Test
-    public void testGetAllDogByOwnerId_US2() {
-
-        login("user", "test");
-
-        given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .get("/dogs/{id}/owners", o1.getId())
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("name", hasItems(d1.getName()))
-                .body("name", hasItems("Dog 1"));
-
-    }
-
-    @Test
-    public void testGetAllWalkersByDogId_US3() {
-
-        login("user", "test");
-
-        given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .get("/dogs/{id}/walkers", d1.getId())
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("name", hasItems(d1.getWalkers().get(0).getName()))
-                .body("name", hasItems("Walker 1"));
-
-    }
-
-    @Test
-    public void testAddDog__US4() {
-         DogDTO dogDTO = new DogDTO("Name 10", "Breed 10", "http", "M", "28-04-1980");
-        WalkerSmallDTO walkerSmallDTO = new WalkerSmallDTO("Walker 3", "Address 3", "33333333");
-        OwnerSmallDTO ownerSmallDTO = new OwnerSmallDTO("Owner 3", "Address 3", "33333333");
-        dogDTO.addWalkerSmallDTO(walkerSmallDTO);
-        dogDTO.setOwner(ownerSmallDTO); 
-//        Dog d3 = new Dog("Name 10", "Breed 10", "http", Dog.Gender.F, "28-04-1980");
-//        Walker w3 = new Walker("Walker 3", "Address 3", "33333333");
-//        Owner o3 = new Owner("Owner 3", "Address 3", "33333333");
-//        d3.addWalkers(w3);
-//        d3.setOwner(o3);
-//        DogDTO dogDTO = new DogDTO(d3);
-        System.out.println(dogDTO);
-        String requestBody = GSON.toJson(dogDTO);
-
-        login("admin", "test");
-
-        given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .body(requestBody)
-                .post("/dogs")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("name", equalTo("Name 10"));
-    }
-
-    @Test
-    public void testConnectOwnerToDog_US5() {
-
-        assertEquals("Owner 2", d2.getOwner().getName());
-
-        login("admin", "test");
-
-        String requestBody = GSON.toJson("");
-
-        DogDTO dogDTO = given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .body(requestBody)
-                .put("/dogs/{id1}/owners/{id2}", d2.getId(), o3.getId())
-                .then()
-                .extract().body().jsonPath().getObject(".", DogDTO.class);
-
-        assertEquals("Owner 9", dogDTO.getOwner().getName());
-
-    }
-
-    @Test
-    public void testEditDog_US6() {
-
-        login("admin", "test");
-
-        d1.setBreed("New Breed");
-        DogDTO dogDTO = new DogDTO(d1);
-        String requestBody = GSON.toJson(dogDTO);
-
-        given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .body(requestBody)
-                .put("/dogs/{id}", d1.getId())
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("breed", equalTo("New Breed"));
-    }
-
-    @Test
-    public void testDeleteDog_US7() {
-
-        login("admin", "test");
-
-        given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .delete("/dogs/{id}", d1.getId())
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("status", equalTo("removed"));
-
-    }
-
-    @Test
-    public void testExceptions() {
-        Dog d3 = new Dog("Name 10", "Breed 10", "http", Dog.Gender.F, "28-04-1980");
-        DogDTO dogDTO = new DogDTO(d3);
-        String requestBody = GSON.toJson(dogDTO);
-
-        login("admin", "test");
-
-        given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .body(requestBody)
-                .post("/dogs")
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("message", equalTo("Walkers are empty"));
-    }
-
-    @Test
-    public void testIntegration() {
-         DogDTO dogDTO = new DogDTO("Name 10", "Breed 10", "http", "M", "28-04-1980");
-        WalkerSmallDTO walkerSmallDTO = new WalkerSmallDTO("Walker 3", "Address 3", "33333333");
-        OwnerSmallDTO ownerSmallDTO = new OwnerSmallDTO("Owner 3", "Address 3", "33333333");
-        dogDTO.addWalkerSmallDTO(walkerSmallDTO);
-        dogDTO.setOwner(ownerSmallDTO); 
-//        Dog d = new Dog("Name 10", "Breed 10", "http", Dog.Gender.F, "28-04-1980");
-//        Walker w = new Walker("Walker 3", "Address 3", "33333333");
-//        Owner o = new Owner("Owner 3", "Address 3", "33333333");
-//        d.addWalkers(w);
-//        d.setOwner(o);
-//        DogDTO dogDTO = new DogDTO(d);
-        System.out.println("----");
-        System.out.println(dogDTO.toString());
-        System.out.println("----");
-        String requestBody = GSON.toJson(dogDTO);
-
-        login("admin", "test");
-
-        dogDTO = given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .body(requestBody)
-                .post("/dogs")
-                .then()
-                .extract().body().jsonPath().getObject(".", DogDTO.class);
-        
-        assertEquals("Name 10", dogDTO.getName());
-        
-        String requestBody1 = GSON.toJson("");
-        
-        //Connect dog with new owner
-        dogDTO = given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .body(requestBody1)
-                .put("/dogs/{id1}/owners/{id2}", dogDTO.getId(), o3.getId())
-                .then()
-                .extract().body().jsonPath().getObject(".", DogDTO.class);
-
-        assertEquals("Owner 9", dogDTO.getOwner().getName());
-
-        //Edit dog
-        dogDTO.setBreed("New Breed");
-        String requestBody2 = GSON.toJson(dogDTO);
-        
-        dogDTO = given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .body(requestBody2)
-                .put("/dogs/{id}", dogDTO.getId())
-                .then()
-                .extract().body().jsonPath().getObject(".", DogDTO.class);
-
-        assertEquals("New Breed", dogDTO.getBreed());
-
-        //Delete dog
-        given()
-                .contentType("application/json")
-                .header("x-access-token", securityToken)
-                .and()
-                .delete("/dogs/{id}", dogDTO.getId())
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("status", equalTo("removed"));
+                .body("wheelName", equalTo(w.getWheelName()));
     }
 
 }
